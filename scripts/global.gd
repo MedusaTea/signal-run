@@ -62,7 +62,6 @@ func addOrb(type) -> void:
 		orb = emptyOrbScene.instantiate()
 	else:
 		return
-		#orb = orbScene.instantiate()
 		
 	OrbsControl.add_child(orb)
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
