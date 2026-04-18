@@ -2,7 +2,7 @@ extends Node
 
 @onready var RootNode = get_node('/root/Root')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
-@onready var Character = get_node('/root/Root/Node3D/Character/RigidBody3D')
+@onready var Character = get_node('/root/Root/Node3D/Character')
 
 @onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
 @onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
@@ -15,7 +15,6 @@ extends Node
 @export var pressDelayThreshold = 0.2
 @export var pressDelay = pressDelayThreshold
 
-@export var sideStopRange = 5
 
 var orbQueue = []
 
@@ -23,39 +22,22 @@ func _process(delta: float) -> void:
 	pressDelay += delta
 	if pressDelay < pressDelayThreshold:
 		return
-		
-	if Input.is_action_pressed("press_punch"):
-		addOrb('punch')
-	
-	if Input.is_action_pressed("press_swim"):
-		addOrb('swim')
-	
-	if Input.is_action_pressed("press_kick"):
-		addOrb('kick')
-	
-	if Input.is_action_pressed("press_climb"):
-		addOrb('climb')
-
-	if Input.is_action_pressed("press_left"):
-		addOrb('left')
-
-	if Input.is_action_pressed("press_duck"):
-		addOrb('duck')
-
-	if Input.is_action_pressed("press_jump"):
-		addOrb('jump')
-
-	if Input.is_action_pressed("press_right"):
-		addOrb('right')
+	if Input.is_action_pressed("press_punch"): addOrb('punch')
+	if Input.is_action_pressed("press_swim"): addOrb('swim')
+	if Input.is_action_pressed("press_kick"): addOrb('kick')
+	if Input.is_action_pressed("press_climb"): addOrb('climb')
+	if Input.is_action_pressed("press_left"): addOrb('left')
+	if Input.is_action_pressed("press_duck"): addOrb('duck')
+	if Input.is_action_pressed("press_jump"): addOrb('jump')
+	if Input.is_action_pressed("press_right"): addOrb('right')
 
 func addOrb(type) -> void:
-	if type != 'empty':
-		pressDelay = 0
-		
 	var orbCount = orbQueue.size()
-	
 	if orbCount > 6:
 		return
+	
+	if type != 'empty':
+		pressDelay = 0
 		
 	var orb 
 	if type == 'left':
@@ -89,24 +71,7 @@ func popOrb() -> void:
 		var orb = orbQueue.pop_front()
 		orb.queue_free()
 		updateAllOrbPositions()
-		handleAction(orb.name)
-		
-func handleAction(name) -> void:
-	if name.contains('left'):
-		if Character.position.x > -sideStopRange:
-			Character.position -= Vector3(3, 0, 0)
-
-	elif name.contains('right'):
-		if Character.position.x < sideStopRange:
-			Character.position += Vector3(3, 0, 0)
-
-	elif name.contains('jump'):
-		if abs(Character.position.y) < 2:
-			Character.position += Vector3(0, 4, 0)
-
-	elif name.contains('duck'):
-		if abs(Character.position.y) < 2:
-			Character.position -= Vector3(0, 1.3, 0)
+		Character.handleAction(orb.name)
 		
 func _on_empty_orb_timer_timeout() -> void:
 	addOrb('empty')

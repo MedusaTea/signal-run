@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbxvidfmvddeb" path="res://scenes/floor.tscn" id="2_sugp2"]
 [ext_resource type="Theme" uid="uid://mk4nu7dkl8b2" path="res://themes/default.tres" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://70teesn04f45" path="res://scripts/fps.gd" id="5_tefeu"]
+[ext_resource type="PackedScene" uid="uid://tnidn312rrrf" path="res://scenes/log.tscn" id="5_tipki"]
 [ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
 
 [node name="Root" type="Node" unique_id=2065148067]
@@ -14,12 +15,12 @@ script = ExtResource("1_o6xl0")
 [node name="Node3D" type="Node3D" parent="." unique_id=1465708405]
 
 [node name="Character" parent="Node3D" unique_id=4821569 instance=ExtResource("1_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.454864, 0)
 
 [node name="Floor" parent="Node3D" unique_id=2004801252 instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
 
 [node name="TerrainTest" parent="Node3D" unique_id=613985946 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11951399, -13.184507)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.985893, -39.841965)
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=966227079]
 transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 4.9272947, 3.8944798)
@@ -30,6 +31,9 @@ transform = Transform3D(1, 0, 0, 0, 0.99208623, 0.12555833, 0, -0.12555833, 0.99
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Node3D" unique_id=754049602]
 transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1.0000001, 0, -1.0000001, 0, -4.371139e-08, 0, 0, 10)
+
+[node name="Log" parent="Node3D" unique_id=238117868 instance=ExtResource("5_tipki")]
+transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.16783759, 0.016714146, 0.016574591, -0.04268995, 0.9998443, 0, 0.82090735, -32.094833)
 
 [node name="Control" type="Control" parent="." unique_id=1863188031]
 layout_mode = 3
@@ -65,10 +69,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="EmptyOrbTimer" type="Timer" parent="." unique_id=1831977328]
-autostart = true
+wait_time = 1.5
 
 [node name="PopOrbTimer" type="Timer" parent="." unique_id=207739798]
-wait_time = 1.5
+wait_time = 0.19
 autostart = true
 
 [connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]

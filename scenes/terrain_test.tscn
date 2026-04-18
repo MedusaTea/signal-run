@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dw0q0770u60br" path="res://scripts/terrain_test.gd" id="1_w3uoq"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_w3uoq"]
+friction = 0.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_sgp6g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
@@ -12,20 +15,20 @@ albedo_color = Color(1, 0.3764706, 0.1764706, 1)
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_sgp6g")
 
-[node name="TerrainTest" type="RigidBody3D" unique_id=613985946]
-collision_layer = 0
-collision_mask = 0
+[node name="TerrainTestRigid" type="RigidBody3D" unique_id=613985946]
+collision_layer = 2
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 mass = 200.0
+physics_material_override = SubResource("PhysicsMaterial_w3uoq")
 gravity_scale = 0.0
-linear_velocity = Vector3(0, 0, 5)
+linear_velocity = Vector3(0, 0, 10)
 script = ExtResource("1_w3uoq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1207817867]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -11.399407, -8.735326)
+transform = Transform3D(18, 0, 0, 0, 18, 0, 0, 0, 18, 0, 0, 0)
 shape = SubResource("BoxShape3D_sgp6g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1476048592]

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://riqpxrrct3c2"]
 
+[ext_resource type="Script" uid="uid://o8lw3donny11" path="res://scripts/character.gd" id="1_agfs1"]
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sgp6g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
@@ -9,13 +11,20 @@ albedo_color = Color(0.75686276, 0.5058824, 1, 1)
 material = SubResource("StandardMaterial3D_o5qli")
 
 [node name="Character" type="Node3D" unique_id=4821569]
+script = ExtResource("1_agfs1")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=885765994]
-collision_mask = 7
+collision_mask = 3
+axis_lock_linear_y = true
 axis_lock_angular_z = true
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1346834629]
 shape = SubResource("CylinderShape3D_sgp6g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D" unique_id=2083461854]
 mesh = SubResource("CylinderMesh_o5qli")
+
+[connection signal="body_entered" from="RigidBody3D" to="." method="_on_body_entered"]

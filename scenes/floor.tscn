@@ -13,7 +13,7 @@ collision_layer = 4
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1502636807]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -11.399407, -8.735326)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 shape = SubResource("BoxShape3D_sgp6g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=243318940]
