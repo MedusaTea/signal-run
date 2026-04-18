@@ -2,8 +2,15 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sgp6g"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c41w6"]
+frequency = 0.0248
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ukw5w"]
+noise = SubResource("FastNoiseLite_c41w6")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
 resource_local_to_scene = true
+albedo_texture = SubResource("NoiseTexture2D_ukw5w")
 
 [sub_resource type="BoxMesh" id="BoxMesh_sgp6g"]
 material = SubResource("StandardMaterial3D_sgp6g")

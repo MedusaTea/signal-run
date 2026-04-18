@@ -14,10 +14,8 @@ material = SubResource("StandardMaterial3D_o5qli")
 script = ExtResource("1_agfs1")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=885765994]
-collision_mask = 3
-axis_lock_linear_y = true
+collision_mask = 7
 axis_lock_angular_z = true
-gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 10
 
