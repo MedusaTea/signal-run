@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://0gf2o6l5kwjf"]
 
+[ext_resource type="Script" uid="uid://dw0q0770u60br" path="res://scripts/terrain_test.gd" id="1_w3uoq"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_sgp6g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
@@ -12,7 +14,9 @@ material = SubResource("StandardMaterial3D_sgp6g")
 
 [node name="TerrainTest" type="RigidBody3D" unique_id=613985946]
 collision_layer = 2
-freeze = true
+gravity_scale = 0.0
+linear_velocity = Vector3(0, 0, 20)
+script = ExtResource("1_w3uoq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1207817867]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -11.399407, -8.735326)
