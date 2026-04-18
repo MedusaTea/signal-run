@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Signal Run"
+config/description="Its a runner"
 run/main_scene="uid://rg8xwmj3ag1b"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://assets/icon.svg"
+config/icon="uid://csurggrkamcg3"
 
 [display]
 
@@ -23,9 +24,10 @@ window/size/viewport_height=1080
 [file_customization]
 
 folder_colors={
-"res://assets/": "gray",
-"res://scenes/": "orange",
-"res://scripts/": "teal"
+"res://assets/": "orange",
+"res://scenes/": "teal",
+"res://scripts/": "pink",
+"res://themes/": "gray"
 }
 
 [input]
