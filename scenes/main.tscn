@@ -9,8 +9,26 @@
 [ext_resource type="PackedScene" uid="uid://tnidn312rrrf" path="res://scenes/log.tscn" id="5_tipki"]
 [ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
+frequency = 0.027
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_85g3d"]
+noise = SubResource("FastNoiseLite_tipki")
+seamless = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_choun"]
+sky_top_color = Color(0.6656201, 0.52615243, 0.9645712, 1)
+sky_horizon_color = Color(0.35000384, 0.62271047, 0.76501966, 1)
+sky_cover = SubResource("NoiseTexture2D_85g3d")
+sky_cover_modulate = Color(0.46423507, 0.46423507, 0.46423507, 1)
+
+[sub_resource type="Sky" id="Sky_tipki"]
+sky_material = SubResource("ProceduralSkyMaterial_choun")
+
 [sub_resource type="Environment" id="Environment_tipki"]
-ambient_light_color = Color(1, 1, 1, 1)
+background_mode = 2
+sky = SubResource("Sky_tipki")
+ambient_light_source = 3
 
 [node name="Root" type="Node" unique_id=2065148067]
 script = ExtResource("1_o6xl0")
