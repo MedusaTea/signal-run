@@ -3,8 +3,6 @@ extends Node
 @onready var RootNode = get_node('/root/Root')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
 
-@onready var RightOrb3D = get_node('/root/Root/Node3D/Orbs/RightOrb')
-
 @onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
 @onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
 @onready var duckOrbScene = preload("res://scenes/orbs/duck.tscn")
@@ -15,6 +13,8 @@ extends Node
 @export var orbTopOffset = 20
 @export var pressDelayThreshold = 0.2
 @export var pressDelay = pressDelayThreshold
+
+var orbQueue = []
 
 func _process(delta: float) -> void:
 	pressDelay += delta
@@ -49,8 +49,6 @@ func addOrb(type) -> void:
 	if type != 'empty':
 		pressDelay = 0
 		
-	var orbCount = OrbsControl.get_child_count()
-	
 	var orb 
 	if type == 'left':
 		orb = leftOrbScene.instantiate()
@@ -65,12 +63,29 @@ func addOrb(type) -> void:
 	else:
 		return
 	
-	#TODO: handle removing orbs as they get removed
+	var orbCount = orbQueue.size()
+	print(orbCount)
+	
 	var viewport = orb.get_node('SubViewportContainer').get_node('SubViewport')
 	viewport.get_node('Node3D').position = Vector3(-100, orbCount * 100, 0)
 	
 	OrbsControl.add_child(orb)
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
 
-func _on_timer_timeout() -> void:
+	orbQueue.push_back(orb)
+
+func updateAllOrbPositions() -> void:
+	for orb in orbQueue:
+		orb.position = orb.position - Vector2(orbOffset, 0)
+	
+func popOrb() -> void:
+	if orbQueue.size() > 0:
+		var orb = orbQueue.pop_front()
+		orb.queue_free()
+		updateAllOrbPositions()
+		
+func _on_empty_orb_timer_timeout() -> void:
 	addOrb('empty')
+
+func _on_pop_orb_timer_timeout() -> void:
+	popOrb()

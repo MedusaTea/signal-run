@@ -8,14 +8,6 @@
 [ext_resource type="Script" uid="uid://70teesn04f45" path="res://scripts/fps.gd" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktqa0"]
-resource_local_to_scene = true
-transparency = 1
-albedo_color = Color(1, 0.20784314, 1, 0.5176471)
-
-[sub_resource type="SphereMesh" id="SphereMesh_o6xl0"]
-material = SubResource("StandardMaterial3D_ktqa0")
-
 [node name="Root" type="Node" unique_id=2065148067]
 script = ExtResource("1_o6xl0")
 
@@ -38,17 +30,6 @@ transform = Transform3D(1, 0, 0, 0, 0.99208623, 0.12555833, 0, -0.12555833, 0.99
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Node3D" unique_id=754049602]
 transform = Transform3D(-4.3711392e-08, 0, 1, 0, 1.0000001, 0, -1.0000001, 0, -4.371139e-08, 0, 0, 10)
-
-[node name="Orbs" type="Node3D" parent="Node3D" unique_id=564879559]
-
-[node name="RightOrb" type="Node3D" parent="Node3D/Orbs" unique_id=1328034809]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Orbs/RightOrb" unique_id=930564457]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.33281, 0, 19878.17)
-mesh = SubResource("SphereMesh_o6xl0")
-
-[node name="Camera3D" type="Camera3D" parent="Node3D/Orbs/RightOrb" unique_id=1458358862]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -76.4285, 0, 19878.166)
 
 [node name="Control" type="Control" parent="." unique_id=1863188031]
 layout_mode = 3
@@ -83,6 +64,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Timer" type="Timer" parent="." unique_id=1831977328]
+[node name="EmptyOrbTimer" type="Timer" parent="." unique_id=1831977328]
+autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="PopOrbTimer" type="Timer" parent="." unique_id=207739798]
+autostart = true
+
+[connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]
+[connection signal="timeout" from="PopOrbTimer" to="." method="_on_pop_orb_timer_timeout"]
