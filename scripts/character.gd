@@ -30,12 +30,12 @@ func tweenPosition(newPosition: Vector3) -> void:
 	
 func handleAction(name) -> void:
 	if name.contains('left'):
-		if position.x > -sideStopRange:
-			position -= Vector3(3, 0, 0)
+		if rigidBody.position.x > -sideStopRange:
+			tweenPosition(rigidBody.position - Vector3(3, 0, 0))
 
 	elif name.contains('right'):
-		if position.x < sideStopRange:
-			position += Vector3(3, 0, 0)
+		if rigidBody.position.x < sideStopRange:
+			tweenPosition(rigidBody.position + Vector3(3, 0, 0))
 
 	elif name.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
 		tweenPosition(rigidBody.position + Vector3(0, 4, 0))
