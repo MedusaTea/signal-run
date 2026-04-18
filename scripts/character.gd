@@ -34,11 +34,11 @@ func handleAction(name) -> void:
 			position += Vector3(3, 0, 0)
 
 	elif name.contains('jump') and !ducking:
-		if abs(rigidBody.position.y) < 2:
+		if abs(rigidBody.position.y) < 1.5:
 			rigidBody.position += Vector3(0, 4, 0)
 
 	elif name.contains('duck') and !ducking:
-		if abs(rigidBody.position.y) < 2:
+		if abs(rigidBody.position.y) < 1.5:
 			rigidBody.collision_mask = 3
 			rigidBody.gravity_scale = 0.0
 			ducking = true

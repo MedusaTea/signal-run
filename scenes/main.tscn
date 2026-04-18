@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://tnidn312rrrf" path="res://scenes/log.tscn" id="5_tipki"]
 [ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
 
+[sub_resource type="Environment" id="Environment_tipki"]
+ambient_light_color = Color(1, 1, 1, 1)
+
 [node name="Root" type="Node" unique_id=2065148067]
 script = ExtResource("1_o6xl0")
 
@@ -20,7 +23,7 @@ script = ExtResource("1_o6xl0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
 
 [node name="TerrainTest" parent="Node3D" unique_id=613985946 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016155243, -9.781786, -63.80831)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016155243, -9.781786, -71.80831)
 linear_velocity = Vector3(0, 0, 20)
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=966227079]
@@ -38,6 +41,9 @@ transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.167
 
 [node name="Log2" parent="Node3D" unique_id=1254329154 instance=ExtResource("5_tipki")]
 transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.16783759, 0.016714146, 0.016574591, -0.04268995, 0.9998443, 0, -0.55880284, -49.013195)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D" unique_id=51895972]
+environment = SubResource("Environment_tipki")
 
 [node name="Control" type="Control" parent="." unique_id=1863188031]
 layout_mode = 3
@@ -73,10 +79,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="EmptyOrbTimer" type="Timer" parent="." unique_id=1831977328]
-wait_time = 1.5
+wait_time = 0.5
+autostart = true
 
 [node name="PopOrbTimer" type="Timer" parent="." unique_id=207739798]
-wait_time = 1.0999999999999999
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]
