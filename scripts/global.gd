@@ -49,6 +49,11 @@ func addOrb(type) -> void:
 	if type != 'empty':
 		pressDelay = 0
 		
+	var orbCount = orbQueue.size()
+	
+	if orbCount > 6:
+		return
+		
 	var orb 
 	if type == 'left':
 		orb = leftOrbScene.instantiate()
@@ -62,9 +67,6 @@ func addOrb(type) -> void:
 		orb = emptyOrbScene.instantiate()
 	else:
 		return
-	
-	var orbCount = orbQueue.size()
-	print(orbCount)
 	
 	var viewport = orb.get_node('SubViewportContainer').get_node('SubViewport')
 	viewport.get_node('Node3D').position = Vector3(-100, orbCount * 100, 0)

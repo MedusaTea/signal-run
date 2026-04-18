@@ -68,6 +68,7 @@ grow_vertical = 2
 autostart = true
 
 [node name="PopOrbTimer" type="Timer" parent="." unique_id=207739798]
+wait_time = 1.5
 autostart = true
 
 [connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]
