@@ -9,11 +9,36 @@ extends Node
 @export var orbTopOffset = 20
 
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_pressed("press_punch"):
+		addOrb('punch')
+	
+	if Input.is_action_pressed("press_swim"):
+		addOrb('swim')
+	
+	if Input.is_action_pressed("press_kick"):
+		addOrb('kick')
+	
+	if Input.is_action_pressed("press_climb"):
+		addOrb('climb')
 
-func _on_timer_timeout() -> void:
+	if Input.is_action_pressed("press_left"):
+		addOrb('left')
+
+	if Input.is_action_pressed("press_duck"):
+		addOrb('duck')
+
+	if Input.is_action_pressed("press_jump"):
+		addOrb('jump')
+
+	if Input.is_action_pressed("press_right"):
+		addOrb('right')
+
+func addOrb(type) -> void:
 	var orbCount = OrbsControl.get_child_count()
 	
 	var orb = orbScene.instantiate()
 	OrbsControl.add_child(orb)
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
+
+func _on_timer_timeout() -> void:
+	addOrb('empty')
