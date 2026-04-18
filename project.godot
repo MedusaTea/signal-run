@@ -21,9 +21,14 @@ config/icon="uid://csurggrkamcg3"
 window/size/viewport_width=1980
 window/size/viewport_height=1080
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
+"res://addons/": "gray",
 "res://assets/": "orange",
 "res://scenes/": "teal",
 "res://scripts/": "pink",
