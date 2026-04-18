@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bbxvidfmvddeb" path="res://scenes/floor.tscn" id="2_sugp2"]
 [ext_resource type="Theme" uid="uid://mk4nu7dkl8b2" path="res://themes/default.tres" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://70teesn04f45" path="res://scripts/fps.gd" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
 
 [node name="Root3D" type="Node" unique_id=2065148067]
 
@@ -41,9 +42,10 @@ text = "FPS: 120
 "
 script = ExtResource("5_tefeu")
 
-[node name="TextureRect" type="TextureRect" parent="Control" unique_id=763240215]
+[node name="QueueBar" type="TextureRect" parent="Control" unique_id=1574263793]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 34.0
-offset_right = 1314.0
-offset_bottom = 239.0
+offset_left = 20.0
+offset_top = 19.0
+offset_right = 935.0
+offset_bottom = 164.0
+texture = ExtResource("6_tefeu")
