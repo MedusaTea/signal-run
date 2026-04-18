@@ -4,6 +4,10 @@ extends Node
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
 
 @onready var orbScene = preload("res://scenes/orb.tscn")
+@onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
+@onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
+@onready var duckOrbScene = preload("res://scenes/orbs/duck.tscn")
+@onready var jumpOrbScene = preload("res://scenes/orbs/jump.tscn")
 
 @export var orbOffset = 115
 @export var orbTopOffset = 20
@@ -45,7 +49,20 @@ func addOrb(type) -> void:
 		
 	var orbCount = OrbsControl.get_child_count()
 	
-	var orb = orbScene.instantiate()
+	var orb 
+	if type == 'left':
+		orb = leftOrbScene.instantiate()
+	if type == 'duck':
+		orb = duckOrbScene.instantiate()
+	if type == 'jump':
+		orb = jumpOrbScene.instantiate()
+	if type == 'right':
+		orb = rightOrbScene.instantiate()
+	if type == 'empty':
+		orb = orbScene.instantiate()
+	else:
+		orb = orbScene.instantiate()
+		
 	OrbsControl.add_child(orb)
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
 
