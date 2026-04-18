@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var rigidBody = $RigidBody3D
 
-@export var sideStopRange = 5
+@export var sideStopRange = 6
 
 @export var duckTimerMax = 2.0
 @export var duckTimer = duckTimerMax
@@ -31,11 +31,11 @@ func tweenPosition(newPosition: Vector3) -> void:
 func handleAction(name) -> void:
 	if name.contains('left'):
 		if rigidBody.position.x > -sideStopRange:
-			tweenPosition(rigidBody.position - Vector3(3, 0, 0))
+			tweenPosition(rigidBody.position - Vector3(2, 0, 0))
 
 	elif name.contains('right'):
 		if rigidBody.position.x < sideStopRange:
-			tweenPosition(rigidBody.position + Vector3(3, 0, 0))
+			tweenPosition(rigidBody.position + Vector3(2, 0, 0))
 
 	elif name.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
 		tweenPosition(rigidBody.position + Vector3(0, 4, 0))
