@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://rg8xwmj3ag1b"]
+
+[ext_resource type="PackedScene" uid="uid://riqpxrrct3c2" path="res://scenes/character.tscn" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://0gf2o6l5kwjf" path="res://scenes/terrain_test.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bbxvidfmvddeb" path="res://scenes/floor.tscn" id="2_sugp2"]
+
+[node name="Root3D" type="Node3D" unique_id=808293850]
+
+[node name="Character" parent="." unique_id=4821569 instance=ExtResource("1_0wfyh")]
+
+[node name="Floor" parent="." unique_id=2004801252 instance=ExtResource("2_sugp2")]
+
+[node name="TerrainTest" parent="." unique_id=613985946 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41134596, -21.22073)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=966227079]
+transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 4.9272947, 3.8944798)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=544136109]
+transform = Transform3D(1, 0, 0, 0, 0.99208623, 0.12555833, 0, -0.12555833, 0.99208623, 0, 0, 8.0961)

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bbxvidfmvddeb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sgp6g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_sgp6g"]
+material = SubResource("StandardMaterial3D_sgp6g")
+
+[node name="Floor" type="RigidBody3D" unique_id=2004801252]
+collision_layer = 4
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1502636807]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -11.399407, -8.735326)
+shape = SubResource("BoxShape3D_sgp6g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=243318940]
+mesh = SubResource("BoxMesh_sgp6g")

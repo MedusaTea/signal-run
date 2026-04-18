@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://0gf2o6l5kwjf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sgp6g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.3764706, 0.1764706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sgp6g"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_sgp6g")
+
+[node name="TerrainTest" type="RigidBody3D" unique_id=613985946]
+collision_layer = 2
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1207817867]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -11.399407, -8.735326)
+shape = SubResource("BoxShape3D_sgp6g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1476048592]
+mesh = SubResource("BoxMesh_sgp6g")
