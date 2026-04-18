@@ -3,6 +3,8 @@ extends Node
 @onready var RootNode = get_node('/root/Root')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
 
+@onready var RightOrb3D = get_node('/root/Root/Node3D/Orbs/RightOrb')
+
 @onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
 @onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
 @onready var duckOrbScene = preload("res://scenes/orbs/duck.tscn")
@@ -62,7 +64,11 @@ func addOrb(type) -> void:
 		orb = emptyOrbScene.instantiate()
 	else:
 		return
-		
+	
+	#TODO: handle removing orbs as they get removed
+	var viewport = orb.get_node('SubViewportContainer').get_node('SubViewport')
+	viewport.get_node('Node3D').position = Vector3(-100, orbCount * 100, 0)
+	
 	OrbsControl.add_child(orb)
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
 
