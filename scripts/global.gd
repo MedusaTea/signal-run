@@ -7,7 +7,7 @@ extends Node
 @onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
 @onready var duckOrbScene = preload("res://scenes/orbs/duck.tscn")
 @onready var jumpOrbScene = preload("res://scenes/orbs/jump.tscn")
-#@onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
+@onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
 
 @export var orbOffset = 115
 @export var orbTopOffset = 20
