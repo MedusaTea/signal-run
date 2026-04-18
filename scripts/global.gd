@@ -7,8 +7,14 @@ extends Node
 
 @export var orbOffset = 115
 @export var orbTopOffset = 20
+@export var pressDelayThreshold = 0.2
+@export var pressDelay = pressDelayThreshold
 
 func _process(delta: float) -> void:
+	pressDelay += delta
+	if pressDelay < pressDelayThreshold:
+		return
+		
 	if Input.is_action_pressed("press_punch"):
 		addOrb('punch')
 	
@@ -34,6 +40,9 @@ func _process(delta: float) -> void:
 		addOrb('right')
 
 func addOrb(type) -> void:
+	if type != 'empty':
+		pressDelay = 0
+		
 	var orbCount = OrbsControl.get_child_count()
 	
 	var orb = orbScene.instantiate()

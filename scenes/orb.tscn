@@ -2,6 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="1_ktqa0"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_ktqa0"]
+
+[sub_resource type="Environment" id="Environment_ktqa0"]
+ambient_light_color = Color(1, 1, 1, 1)
+
 [node name="AspectRatioContainer" type="AspectRatioContainer" unique_id=755513043]
 offset_right = 101.326
 offset_bottom = 105.0
@@ -10,3 +15,19 @@ offset_bottom = 105.0
 layout_mode = 2
 texture = ExtResource("1_ktqa0")
 expand_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1880047831]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2141018382]
+transparent_bg = true
+size = Vector2i(101, 101)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=641631598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.88246)
+mesh = SubResource("SphereMesh_ktqa0")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=1329616451]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 14.827535)
+environment = SubResource("Environment_ktqa0")
