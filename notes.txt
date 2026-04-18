@@ -1,0 +1,10 @@
+h = left
+j = duck
+k = jump
+l = right
+
+a = high punch
+s = swim
+d = low kick
+f = climb
+
