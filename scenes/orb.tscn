@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://r32iv35dbh1p"]
+
+[ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="1_ktqa0"]
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" unique_id=755513043]
+offset_right = 101.326
+offset_bottom = 105.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=846135846]
+layout_mode = 2
+texture = ExtResource("1_ktqa0")
+expand_mode = 1
