@@ -40,30 +40,30 @@ func tweenPosition(body, offset: Vector3) -> void:
 	tween.tween_property(body, "position", body.position + offset, 0.1)
 	moveAudioPlayer.play()
 	
-func handleAction(name) -> void:
-	if name.contains('left'):
+func HandleAction(orbName) -> void:
+	if orbName.contains('left'):
 		if self.position.x > -sideStopRange:
 			tweenPosition(self, Vector3(-2, 0, 0))
 
-	elif name.contains('right'):
+	elif orbName.contains('right'):
 		if self.position.x < sideStopRange:
 			tweenPosition(self, Vector3(2, 0, 0))
 
-	elif name.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
+	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
 		tweenPosition(rigidBody, Vector3(0, 4, 0))
 	
-	elif name.contains('duck') and !ducking and abs(rigidBody.position.y) < 1.5:
+	elif orbName.contains('duck') and !ducking and abs(rigidBody.position.y) < 1.5:
 		rigidBody.collision_mask = 3
 		rigidBody.gravity_scale = 0.0
 		ducking = true
 		
 		tweenPosition(rigidBody, Vector3(0, -1, 0))
 	
-	elif name.contains('swim'):
+	elif orbName.contains('swim'):
 		pass
-	elif name.contains('climb'):
+	elif orbName.contains('climb'):
 		pass	
-	elif name.contains('punch'):
+	elif orbName.contains('punch'):
 		pass
-	elif name.contains('kick'):
+	elif orbName.contains('kick'):
 		pass
