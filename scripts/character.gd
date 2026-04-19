@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var rigidBody = $RigidBody3D
+@onready var collisionAudioPlayer = get_node('/root/Root/collisionAudioStreamPlayer')
 
 @export var sideStopRange = 6
 
@@ -22,6 +23,8 @@ func _physics_process(delta: float) -> void:
 		rigidBody.position.y = -1
 		
 func _on_body_entered(body: Node) -> void:
+	if !body.name.contains('Floor'):
+		collisionAudioPlayer.play()
 	print(body.name)
 
 func tweenPosition(newPosition: Vector3) -> void:
