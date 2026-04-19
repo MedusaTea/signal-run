@@ -26,7 +26,6 @@ axis_lock_angular_z = true
 mass = 200.0
 physics_material_override = SubResource("PhysicsMaterial_w3uoq")
 gravity_scale = 0.0
-linear_velocity = Vector3(0, 0, 10)
 script = ExtResource("1_w3uoq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainTestRigid" unique_id=1207817867]

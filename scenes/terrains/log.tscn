@@ -22,7 +22,6 @@ transform = Transform3D(1, 0, 0, 0, 3.0870137, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="LogRigidBody3D" type="RigidBody3D" parent="." unique_id=1728252174]
 gravity_scale = 0.0
-linear_velocity = Vector3(0, 0, 20)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LogRigidBody3D" unique_id=105804308]
 shape = SubResource("CylinderShape3D_o6xl0")

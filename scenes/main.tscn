@@ -48,11 +48,9 @@ script = ExtResource("1_o6xl0")
 
 [node name="TerrainTest" parent="Node3D/TerrainObjects" unique_id=613985946 instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016155243, -9.781786, -71.80831)
-linear_velocity = Vector3(0, 0, 20)
 
 [node name="TerrainTest2" parent="Node3D/TerrainObjects" unique_id=1615273644 instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.214476, -1.2319899, -108.11075)
-linear_velocity = Vector3(0, 0, 20)
 
 [node name="Log" parent="Node3D/TerrainObjects" unique_id=238117868 instance=ExtResource("5_tipki")]
 transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.16783759, 0.016714146, 0.016574591, -0.04268995, 0.9998443, 0, 0.8209076, -32.094833)
@@ -62,7 +60,6 @@ transform = Transform3D(0.024388053, 6.998652, 0.012785434, -1.0204741, 0.166556
 
 [node name="TerrainTest3" parent="Node3D/TerrainObjects" unique_id=814944967 instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3711433, -1.2319899, -154.13707)
-linear_velocity = Vector3(0, 0, 20)
 
 [node name="Floor" parent="Node3D" unique_id=2004801252 instance=ExtResource("2_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
@@ -141,6 +138,33 @@ size_flags_vertical = 4
 theme = ExtResource("4_jyhfs")
 text = "Go Again"
 
+[node name="StartScreen" type="AspectRatioContainer" parent="Control" unique_id=1775003134]
+layout_mode = 0
+offset_right = 1977.0
+offset_bottom = 1092.0
+stretch_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="Control/StartScreen" unique_id=1940939697]
+layout_mode = 2
+color = Color(0.5647059, 0.5686275, 0.80784315, 0.72156864)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/StartScreen" unique_id=1989862850]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/StartScreen/VBoxContainer" unique_id=372613571]
+layout_mode = 2
+theme = ExtResource("4_jyhfs")
+text = "[art and stuff go here]"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control/StartScreen/VBoxContainer" unique_id=300257667]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_jyhfs")
+text = "Start Game"
+
 [node name="EmptyOrbTimer" type="Timer" parent="." unique_id=1831977328]
 wait_time = 0.5
 autostart = true
@@ -161,5 +185,6 @@ stream = ExtResource("11_ya4ey")
 volume_db = -10.0
 
 [connection signal="button_up" from="Control/GameOverScreen/VBoxContainer/Button" to="." method="_on_restart_button_up"]
+[connection signal="button_up" from="Control/StartScreen/VBoxContainer/Button" to="." method="_on_start_button_up"]
 [connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]
 [connection signal="timeout" from="PopOrbTimer" to="." method="_on_pop_orb_timer_timeout"]
