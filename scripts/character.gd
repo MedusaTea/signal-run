@@ -14,6 +14,8 @@ extends Node3D
 
 @export var ducking = false
 
+var firstContactFloor = true
+
 func _ready() -> void:
 	pass
 
@@ -36,9 +38,10 @@ func _on_body_entered(body: Node) -> void:
 	if !body.name.contains('Floor'):
 		collisionAudioPlayer.play()
 		GlobalRoot.GameOverMan()
-	else: #hit the floor, start runnin
+	elif !firstContactFloor: # hit the floor, start runnin
 		dude.StartRunning()
-		
+	else:
+		firstContactFloor = false
 	print(body.name)
 
 func tweenPosition(body, offset: Vector3) -> void:

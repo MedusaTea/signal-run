@@ -18,7 +18,6 @@ extends Node
 @onready var jumpOrbScene = preload("res://scenes/orbs/jump.tscn")
 @onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
 
-
 var orbQueue = []
 
 func _ready() -> void:
