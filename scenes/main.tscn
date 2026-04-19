@@ -44,6 +44,10 @@ script = ExtResource("1_o6xl0")
 
 [node name="Character" parent="Node3D" unique_id=4821569 instance=ExtResource("1_0wfyh")]
 
+[node name="Camera3D" type="Camera3D" parent="Node3D/Character" unique_id=966227079]
+transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 4.9272947, 3.8944798)
+current = true
+
 [node name="TerrainObjects" type="Node3D" parent="Node3D" unique_id=811346277]
 
 [node name="TerrainTest" parent="Node3D/TerrainObjects" unique_id=613985946 instance=ExtResource("1_o5qli")]
@@ -63,10 +67,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3711433, -1.2319899, -154.
 
 [node name="Floor" parent="Node3D" unique_id=2004801252 instance=ExtResource("2_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=966227079]
-transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 4.9272947, 3.8944798)
-current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=51895972]
 environment = SubResource("Environment_tipki")

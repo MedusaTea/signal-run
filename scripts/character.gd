@@ -35,31 +35,29 @@ func _on_body_entered(body: Node) -> void:
 		
 	print(body.name)
 
-func tweenPosition(newPosition: Vector3) -> void:
+func tweenPosition(body, offset: Vector3) -> void:
 	var tween = get_tree().create_tween()
-	tween.tween_property(rigidBody, "position", newPosition, 0.1)
+	tween.tween_property(body, "position", body.position + offset, 0.1)
 	moveAudioPlayer.play()
 	
 func handleAction(name) -> void:
 	if name.contains('left'):
-		if rigidBody.position.x > -sideStopRange:
-			tweenPosition(rigidBody.position - Vector3(2, 0, 0))
+		if self.position.x > -sideStopRange:
+			tweenPosition(self, Vector3(-2, 0, 0))
 
 	elif name.contains('right'):
-		if rigidBody.position.x < sideStopRange:
-			tweenPosition(rigidBody.position + Vector3(2, 0, 0))
+		if self.position.x < sideStopRange:
+			tweenPosition(self, Vector3(2, 0, 0))
 
 	elif name.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
-		tweenPosition(rigidBody.position + Vector3(0, 4, 0))
+		tweenPosition(rigidBody, Vector3(0, 4, 0))
 	
 	elif name.contains('duck') and !ducking and abs(rigidBody.position.y) < 1.5:
 		rigidBody.collision_mask = 3
 		rigidBody.gravity_scale = 0.0
 		ducking = true
 		
-		var newPosition = rigidBody.position 
-		newPosition.y = -1 
-		tweenPosition(newPosition)
+		tweenPosition(rigidBody, Vector3(0, -1, 0))
 	
 	elif name.contains('swim'):
 		pass
