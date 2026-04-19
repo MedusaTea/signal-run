@@ -37,6 +37,8 @@ func GameStart() -> void:
 	for terrain in TerrainObjects.get_children():
 		terrain.get_child(0).linear_velocity = Vector3(0,0,terrainSpeed)
 
+	Character.GameStart()
+	
 func _process(delta: float) -> void:
 	pressDelay += delta
 	if pressDelay < pressDelayThreshold:
