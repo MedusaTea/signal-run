@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var GlobalRoot = get_node('/root/Root')
 @onready var rigidBody = $RigidBody3D
+@onready var dude = $RigidBody3D/CollisionShape3D/Dude
 @onready var collisionAudioPlayer = get_node('/root/Root/collisionAudio')
 @onready var moveAudioPlayer = get_node('/root/Root/moveAudio')
 @onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
@@ -15,6 +16,9 @@ extends Node3D
 
 func _ready() -> void:
 	pass
+
+func GameStart() -> void:
+	dude.StartRunning()
 	
 func _physics_process(delta: float) -> void:
 	duckTimer -= delta
@@ -32,6 +36,8 @@ func _on_body_entered(body: Node) -> void:
 	if !body.name.contains('Floor'):
 		collisionAudioPlayer.play()
 		GlobalRoot.GameOverMan()
+	else: #hit the floor, start runnin
+		dude.StartRunning()
 		
 	print(body.name)
 
@@ -43,14 +49,17 @@ func tweenPosition(body, offset: Vector3) -> void:
 func HandleAction(orbName) -> void:
 	if orbName.contains('left'):
 		if self.position.x > -sideStopRange:
+			#self.position.x += -2
 			tweenPosition(self, Vector3(-2, 0, 0))
 
 	elif orbName.contains('right'):
 		if self.position.x < sideStopRange:
+			#self.position.x += 2
 			tweenPosition(self, Vector3(2, 0, 0))
 
 	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
 		tweenPosition(rigidBody, Vector3(0, 4, 0))
+		dude.Jump()
 	
 	elif orbName.contains('duck') and !ducking and abs(rigidBody.position.y) < 1.5:
 		rigidBody.collision_mask = 3
