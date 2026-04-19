@@ -111,6 +111,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="GameOverScreen" type="AspectRatioContainer" parent="Control" unique_id=154508587]
+visible = false
+layout_mode = 0
+offset_right = 1977.0
+offset_bottom = 1092.0
+stretch_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="Control/GameOverScreen" unique_id=1473626510]
+layout_mode = 2
+color = Color(1, 1, 1, 0.16862746)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/GameOverScreen" unique_id=1011312160]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/GameOverScreen/VBoxContainer" unique_id=1094290765]
+layout_mode = 2
+theme = ExtResource("4_jyhfs")
+text = "Ya Ded"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control/GameOverScreen/VBoxContainer" unique_id=369553631]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_jyhfs")
+text = "Go Again"
+
 [node name="EmptyOrbTimer" type="Timer" parent="." unique_id=1831977328]
 wait_time = 0.5
 autostart = true
@@ -130,5 +158,6 @@ volume_db = -10.0
 stream = ExtResource("11_ya4ey")
 volume_db = -10.0
 
+[connection signal="button_up" from="Control/GameOverScreen/VBoxContainer/Button" to="." method="_on_restart_button_up"]
 [connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]
 [connection signal="timeout" from="PopOrbTimer" to="." method="_on_pop_orb_timer_timeout"]

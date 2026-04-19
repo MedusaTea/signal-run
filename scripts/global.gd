@@ -10,6 +10,8 @@ extends Node
 @onready var jumpOrbScene = preload("res://scenes/orbs/jump.tscn")
 @onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
 
+@onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
+
 @export var orbOffset = 115
 @export var orbTopOffset = 20
 @export var pressDelayThreshold = 0.2
@@ -78,3 +80,6 @@ func _on_empty_orb_timer_timeout() -> void:
 
 func _on_pop_orb_timer_timeout() -> void:
 	popOrb()
+
+func _on_restart_button_up() -> void:
+	gameOverNode.visible = false

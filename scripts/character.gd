@@ -3,6 +3,7 @@ extends Node3D
 @onready var rigidBody = $RigidBody3D
 @onready var collisionAudioPlayer = get_node('/root/Root/collisionAudio')
 @onready var moveAudioPlayer = get_node('/root/Root/moveAudio')
+@onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
 
 @export var sideStopRange = 6
 
@@ -26,6 +27,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if !body.name.contains('Floor'):
 		collisionAudioPlayer.play()
+		gameOverNode	.visible = true
 	print(body.name)
 
 func tweenPosition(newPosition: Vector3) -> void:
