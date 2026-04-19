@@ -21,6 +21,9 @@ extends Node
 
 var orbQueue = []
 
+func _ready() -> void:
+	randomize()
+
 func GameOverMan() -> void:
 	gameOverScreen.visible = true
 
@@ -87,7 +90,7 @@ func popOrb() -> void:
 		var orb = orbQueue.pop_front()
 		orb.queue_free()
 		updateAllOrbPositions()
-		Character.handleAction(orb.name)
+		Character.HandleAction(orb.name)
 		
 func _on_empty_orb_timer_timeout() -> void: 
 	addOrb('empty')
