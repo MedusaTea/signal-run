@@ -4,7 +4,7 @@ extends Node
 @export var orbTopOffset = 20
 @export var pressDelayThreshold = 0.2
 @export var pressDelay = pressDelayThreshold
-@export var terrainSpeed = 10
+@export var terrainSpeed = 30
 
 @onready var Character = get_node('/root/Root/Node3D/Character')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
@@ -32,9 +32,12 @@ func GameOverMan() -> void:
 func GameStart() -> void:
 	gameOverScreen.visible = false
 	startScreen.visible = false
-	
+
+	for i in 6:
+		popOrb()
+			
 	for terrain in TerrainObjects.get_children():
-		terrain.get_child(0).linear_velocity = Vector3(0,0,terrainSpeed)
+		terrain.queue_free()
 
 	Character.GameStart()
 	
