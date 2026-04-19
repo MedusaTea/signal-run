@@ -53,10 +53,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016155243, -9.781786, -71.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.214476, -1.2319899, -108.11075)
 
 [node name="Log" parent="Node3D/TerrainObjects" unique_id=238117868 instance=ExtResource("5_tipki")]
-transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.16783759, 0.016714146, 0.016574591, -0.04268995, 0.9998443, 0, 0.8209076, -32.094833)
+transform = Transform3D(0.023888623, 6.9978905, 0.0056544696, -0.9995772, 0.16653828, 0.01671416, 0.016574595, -0.042359505, 0.9998443, 0, 0.8209076, -32.094833)
 
 [node name="Log2" parent="Node3D/TerrainObjects" unique_id=1254329154 instance=ExtResource("5_tipki")]
-transform = Transform3D(0.024388053, 6.998652, 0.012785434, -1.0204741, 0.16655655, 0.037792597, 0.016921096, -0.042364113, 2.2607622, 0, -0.55880284, -49.013195)
+transform = Transform3D(0.023888623, 6.9978905, 0.0056544705, -0.9995772, 0.16653828, 0.016714156, 0.016574591, -0.042359512, 0.9998443, 0, -0.55880284, -49.013195)
 
 [node name="TerrainTest3" parent="Node3D/TerrainObjects" unique_id=814944967 instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3711433, -1.2319899, -154.13707)
