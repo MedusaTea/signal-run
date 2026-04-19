@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://rg8xwmj3ag1b"]
 
 [ext_resource type="PackedScene" uid="uid://riqpxrrct3c2" path="res://scenes/character.tscn" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://0gf2o6l5kwjf" path="res://scenes/terrain_test.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://0gf2o6l5kwjf" path="res://scenes/terrains/terrain_test.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://du6uvjdbu4ksr" path="res://scripts/global.gd" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bbxvidfmvddeb" path="res://scenes/floor.tscn" id="2_sugp2"]
 [ext_resource type="Theme" uid="uid://mk4nu7dkl8b2" path="res://themes/default.tres" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://70teesn04f45" path="res://scripts/fps.gd" id="5_tefeu"]
-[ext_resource type="PackedScene" uid="uid://tnidn312rrrf" path="res://scenes/log.tscn" id="5_tipki"]
+[ext_resource type="PackedScene" uid="uid://tnidn312rrrf" path="res://scenes/terrains/log.tscn" id="5_tipki"]
 [ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
 [ext_resource type="AudioStream" uid="uid://cxwk3toi8wnlt" path="res://assets/heroes-bgm.wav" id="9_85g3d"]
 [ext_resource type="AudioStream" uid="uid://c4g68slhqq7w8" path="res://assets/Brick Punch 001.wav" id="10_choun"]
@@ -44,30 +44,32 @@ script = ExtResource("1_o6xl0")
 
 [node name="Character" parent="Node3D" unique_id=4821569 instance=ExtResource("1_0wfyh")]
 
-[node name="Floor" parent="Node3D" unique_id=2004801252 instance=ExtResource("2_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+[node name="TerrainObjects" type="Node3D" parent="Node3D" unique_id=811346277]
 
-[node name="TerrainTest" parent="Node3D" unique_id=613985946 instance=ExtResource("1_o5qli")]
+[node name="TerrainTest" parent="Node3D/TerrainObjects" unique_id=613985946 instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016155243, -9.781786, -71.80831)
 linear_velocity = Vector3(0, 0, 20)
 
-[node name="TerrainTest2" parent="Node3D" unique_id=1615273644 instance=ExtResource("1_o5qli")]
+[node name="TerrainTest2" parent="Node3D/TerrainObjects" unique_id=1615273644 instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.214476, -1.2319899, -108.11075)
 linear_velocity = Vector3(0, 0, 20)
+
+[node name="Log" parent="Node3D/TerrainObjects" unique_id=238117868 instance=ExtResource("5_tipki")]
+transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.16783759, 0.016714146, 0.016574591, -0.04268995, 0.9998443, 0, 0.8209076, -32.094833)
+
+[node name="Log2" parent="Node3D/TerrainObjects" unique_id=1254329154 instance=ExtResource("5_tipki")]
+transform = Transform3D(0.024388053, 6.998652, 0.012785434, -1.0204741, 0.16655655, 0.037792597, 0.016921096, -0.042364113, 2.2607622, 0, -0.55880284, -49.013195)
+
+[node name="TerrainTest3" parent="Node3D/TerrainObjects" unique_id=814944967 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3711433, -1.2319899, -154.13707)
+linear_velocity = Vector3(0, 0, 20)
+
+[node name="Floor" parent="Node3D" unique_id=2004801252 instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=966227079]
 transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 4.9272947, 3.8944798)
 current = true
-
-[node name="Log" parent="Node3D" unique_id=238117868 instance=ExtResource("5_tipki")]
-transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.16783759, 0.016714146, 0.016574591, -0.04268995, 0.9998443, 0, 0.8209076, -32.094833)
-
-[node name="Log2" parent="Node3D" unique_id=1254329154 instance=ExtResource("5_tipki")]
-transform = Transform3D(0.023888644, 7.0524807, 0.0056544836, -0.99957716, 0.16783759, 0.016714146, 0.016574591, -0.04268995, 0.9998443, 0, -0.55880284, -49.013195)
-
-[node name="TerrainTest3" parent="Node3D" unique_id=814944967 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3711433, -1.2319899, -154.13707)
-linear_velocity = Vector3(0, 0, 20)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=51895972]
 environment = SubResource("Environment_tipki")

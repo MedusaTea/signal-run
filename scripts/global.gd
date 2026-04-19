@@ -1,8 +1,15 @@
 extends Node
 
+@export var orbOffset = 115
+@export var orbTopOffset = 20
+@export var pressDelayThreshold = 0.2
+@export var pressDelay = pressDelayThreshold
+
 @onready var RootNode = get_node('/root/Root')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
 @onready var Character = get_node('/root/Root/Node3D/Character')
+
+@onready var TerrainObjects = get_node('/root/Root/Node3D/TerrainObjects')
 
 @onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
 @onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
@@ -12,13 +19,17 @@ extends Node
 
 @onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
 
-@export var orbOffset = 115
-@export var orbTopOffset = 20
-@export var pressDelayThreshold = 0.2
-@export var pressDelay = pressDelayThreshold
-
 
 var orbQueue = []
+
+func GameOverMan() -> void:
+	gameOverNode.visible = true
+
+	for terrain in TerrainObjects.get_children():
+		terrain.get_child(0).linear_velocity = Vector3(0,0,0)
+
+func GameStart() -> void:
+	gameOverNode.visible = false
 
 func _process(delta: float) -> void:
 	pressDelay += delta
@@ -82,4 +93,4 @@ func _on_pop_orb_timer_timeout() -> void:
 	popOrb()
 
 func _on_restart_button_up() -> void:
-	gameOverNode.visible = false
+	GameStart()
