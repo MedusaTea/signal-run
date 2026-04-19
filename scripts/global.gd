@@ -1,8 +1,16 @@
 extends Node
 
-@onready var RootNode = get_node('/root/Root')
-@onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
+@export var orbOffset = 115
+@export var orbTopOffset = 20
+@export var pressDelayThreshold = 0.2
+@export var pressDelay = pressDelayThreshold
+@export var terrainSpeed = 10
+
 @onready var Character = get_node('/root/Root/Node3D/Character')
+@onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
+@onready var TerrainObjects = get_node('/root/Root/Node3D/TerrainObjects')
+@onready var gameOverScreen = get_node('/root/Root/Control/GameOverScreen')
+@onready var startScreen = get_node('/root/Root/Control/StartScreen')
 
 @onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
 @onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
@@ -10,13 +18,21 @@ extends Node
 @onready var jumpOrbScene = preload("res://scenes/orbs/jump.tscn")
 @onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
 
-@export var orbOffset = 115
-@export var orbTopOffset = 20
-@export var pressDelayThreshold = 0.2
-@export var pressDelay = pressDelayThreshold
-
 
 var orbQueue = []
+
+func GameOverMan() -> void:
+	gameOverScreen.visible = true
+
+	for terrain in TerrainObjects.get_children():
+		terrain.get_child(0).linear_velocity = Vector3(0,0,0)
+
+func GameStart() -> void:
+	gameOverScreen.visible = false
+	startScreen.visible = false
+	
+	for terrain in TerrainObjects.get_children():
+		terrain.get_child(0).linear_velocity = Vector3(0,0,terrainSpeed)
 
 func _process(delta: float) -> void:
 	pressDelay += delta
@@ -73,8 +89,11 @@ func popOrb() -> void:
 		updateAllOrbPositions()
 		Character.handleAction(orb.name)
 		
-func _on_empty_orb_timer_timeout() -> void:
+func _on_empty_orb_timer_timeout() -> void: 
 	addOrb('empty')
-
-func _on_pop_orb_timer_timeout() -> void:
+func _on_pop_orb_timer_timeout() -> void: 
 	popOrb()
+func _on_restart_button_up() -> void: 
+	GameStart()
+func _on_start_button_up() -> void: 
+	GameStart()

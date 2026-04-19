@@ -1,8 +1,10 @@
 extends Node3D
 
+@onready var GlobalRoot = get_node('/root/Root')
 @onready var rigidBody = $RigidBody3D
 @onready var collisionAudioPlayer = get_node('/root/Root/collisionAudio')
 @onready var moveAudioPlayer = get_node('/root/Root/moveAudio')
+@onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
 
 @export var sideStopRange = 6
 
@@ -11,6 +13,9 @@ extends Node3D
 
 @export var ducking = false
 
+func _ready() -> void:
+	pass
+	
 func _physics_process(delta: float) -> void:
 	duckTimer -= delta
 	if ducking and duckTimer < 0:
@@ -22,10 +27,12 @@ func _physics_process(delta: float) -> void:
 		
 	if ducking:
 		rigidBody.position.y = -1
-		
+
 func _on_body_entered(body: Node) -> void:
 	if !body.name.contains('Floor'):
 		collisionAudioPlayer.play()
+		GlobalRoot.GameOverMan()
+		
 	print(body.name)
 
 func tweenPosition(newPosition: Vector3) -> void:
