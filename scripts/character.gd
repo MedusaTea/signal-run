@@ -1,7 +1,8 @@
 extends Node3D
 
 @onready var rigidBody = $RigidBody3D
-@onready var collisionAudioPlayer = get_node('/root/Root/collisionAudioStreamPlayer')
+@onready var collisionAudioPlayer = get_node('/root/Root/collisionAudio')
+@onready var moveAudioPlayer = get_node('/root/Root/moveAudio')
 
 @export var sideStopRange = 6
 
@@ -30,6 +31,7 @@ func _on_body_entered(body: Node) -> void:
 func tweenPosition(newPosition: Vector3) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(rigidBody, "position", newPosition, 0.1)
+	moveAudioPlayer.play()
 	
 func handleAction(name) -> void:
 	if name.contains('left'):
