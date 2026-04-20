@@ -1,6 +1,7 @@
 extends Node3D
 
-@export var minSpawnDistance = 75
+@export var minSpawnDistance = 150
+@export var terrainSpeed = 40
 
 @onready var GlobalRoot = get_node('/root/Root')
 
@@ -29,7 +30,7 @@ func SpawnNewObstacle(spawnOffset=0) -> void:
 			modifier.x = 20
 		
 	newNode.position += Vector3(0,0, -minSpawnDistance - spawnOffset) + modifier
-	newNode.get_child(0).linear_velocity = Vector3(0,0,GlobalRoot.terrainSpeed)
+	newNode.get_child(0).linear_velocity = Vector3(0,0,terrainSpeed)
 	add_child(newNode)
 
 func _on_test_spawn_timer_timeout() -> void:

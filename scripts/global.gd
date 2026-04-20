@@ -4,12 +4,11 @@ extends Node
 @export var orbTopOffset = 20
 @export var pressDelayThreshold = 0.2
 @export var pressDelay = pressDelayThreshold
-@export var terrainSpeed = 30
 
 @onready var ObstacleSpawnTimer = $ObstacleSpawnTimer
 @onready var Character = get_node('/root/Root/Node3D/Character')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
-@onready var TerrainObjects = get_node('/root/Root/Node3D/TerrainObjects')
+@onready var Obstacles = get_node('/root/Root/Node3D/Obstacles')
 @onready var gameOverScreen = get_node('/root/Root/Control/GameOverScreen')
 @onready var startScreen = get_node('/root/Root/Control/StartScreen')
 
@@ -30,8 +29,8 @@ func GameOverMan() -> void:
 	
 	ObstacleSpawnTimer.stop()
 	
-	for terrain in TerrainObjects.get_children():
-		terrain.get_child(0).linear_velocity = Vector3(0,0,0)
+	for obstacle in Obstacles.get_children():
+		obstacle.get_child(0).linear_velocity = Vector3(0,0,0)
 
 func GameStart() -> void:
 	gameOverScreen.visible = false
@@ -40,8 +39,8 @@ func GameStart() -> void:
 	for i in 6:
 		popOrb()
 			
-	for terrain in TerrainObjects.get_children():
-		terrain.queue_free()
+	for obstacle in Obstacles.get_children():
+		obstacle.queue_free()
 
 	ObstacleSpawnTimer.start()
 	Character.GameStart()
