@@ -12,6 +12,7 @@ extends Node
 @onready var gameOverScreen = get_node('/root/Root/Control/GameOverScreen')
 @onready var startScreen = get_node('/root/Root/Control/StartScreen')
 
+@onready var punchOrbScene = preload("res://scenes/orbs/punch.tscn")
 @onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
 @onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
 @onready var duckOrbScene = preload("res://scenes/orbs/duck.tscn")
@@ -29,8 +30,11 @@ func GameOverMan() -> void:
 	
 	ObstacleSpawnTimer.stop()
 	
+	var rigidBody
 	for obstacle in Obstacles.get_children():
-		obstacle.get_child(0).linear_velocity = Vector3(0,0,0)
+		rigidBody = obstacle.get_child(0)
+		if rigidBody: # not sure why this is happening but no biggie rn
+			rigidBody.linear_velocity = Vector3(0,0,0)
 
 func GameStart() -> void:
 	gameOverScreen.visible = false
@@ -78,6 +82,8 @@ func addOrb(type) -> void:
 		orb = jumpOrbScene.instantiate()
 	elif type == 'right':
 		orb = rightOrbScene.instantiate()
+	elif type == 'punch':
+		orb = punchOrbScene.instantiate()
 	elif type == 'empty':
 		orb = emptyOrbScene.instantiate()
 	else:

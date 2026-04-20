@@ -11,6 +11,32 @@ albedo_color = Color(0.75686276, 0.5058824, 1, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_o5qli"]
 material = SubResource("StandardMaterial3D_o5qli")
 
+[sub_resource type="Gradient" id="Gradient_rkhd4"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vivg5"]
+noise_type = 2
+frequency = 0.0192
+fractal_type = 2
+fractal_octaves = 10
+cellular_distance_function = 2
+cellular_jitter = 2.0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rkhd4"]
+noise = SubResource("FastNoiseLite_vivg5")
+color_ramp = SubResource("Gradient_rkhd4")
+in_3d_space = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrhn5"]
+transparency = 1
+albedo_color = Color(1, 0.99607843, 0.5019608, 1)
+albedo_texture = SubResource("NoiseTexture2D_rkhd4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_my7n2"]
+material = SubResource("StandardMaterial3D_lrhn5")
+size = Vector2(3, 3)
+
 [node name="Character" type="Node3D" unique_id=4821569]
 script = ExtResource("1_agfs1")
 
@@ -29,5 +55,20 @@ mesh = SubResource("CylinderMesh_o5qli")
 
 [node name="Dude" parent="RigidBody3D/CollisionShape3D" unique_id=200657034 instance=ExtResource("2_rkhd4")]
 transform = Transform3D(-1.6, 0, -2.4159328e-07, 0, 1.6, 0, 2.4159328e-07, 0, -1.6, 0, 0, 0)
+
+[node name="CrashParticles" type="CPUParticles3D" parent="." unique_id=1586521366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969306, -0.59654117)
+emitting = false
+amount = 64
+lifetime = 0.49
+one_shot = true
+speed_scale = 2.31
+explosiveness = 0.74
+mesh = SubResource("QuadMesh_my7n2")
+emission_shape = 1
+emission_sphere_radius = 0.53
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 20.0
 
 [connection signal="body_entered" from="RigidBody3D" to="." method="_on_body_entered"]

@@ -7,20 +7,29 @@ extends Node3D
 @onready var moveAudioPlayer = get_node('/root/Root/moveAudio')
 @onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
 
+@onready var animPlayer: AnimationPlayer = $RigidBody3D/CollisionShape3D/Dude/AnimationPlayer
+
 @export var jumpHeight = 5
 @export var sideStopRange = 6
 @export var sideHop = 4
-@export var duckTimerMax = 2.0
+
+@export var duckTimerMax = 10.0
+@export var isPunchingTimerMax = 10.0
+
 @export var duckTimer = duckTimerMax
+@export var isPunchingTimer = isPunchingTimerMax
 
 @export var ducking = false
+@export var isPunching = false
 
 var firstContactFloor = true
 
 func _ready() -> void:
-	pass
+	animPlayer.speed_scale = 1.25
 
 func GameStart() -> void:
+	$CrashParticles.emitting = false
+	$RigidBody3D.visible = true
 	rotation = Vector3(0,0,0)
 	position = Vector3(0,0,0)
 	
@@ -29,30 +38,45 @@ func GameStart() -> void:
 	rigidBody.linear_velocity = Vector3(0,0,0)
 	rigidBody.angular_velocity = Vector3(0,0,0)
 	
-	dude.StartRunning()
+	StartRunning()
 	
 func _physics_process(delta: float) -> void:
 	duckTimer -= delta
+	isPunchingTimer -= delta
+	
 	if ducking and duckTimer < 0:
+		print('is duck turned off')
 		rigidBody.position.y = 0
 		rigidBody.collision_mask = 7
 		rigidBody.gravity_scale = 1.0
 		ducking = false
 		duckTimer = duckTimerMax
-		dude.StartRunning()
 		
 	if ducking:
 		rigidBody.position.y = -1
+		
+	if isPunching and isPunchingTimer < 0:
+		print('is punching turned off')
+		isPunching = false
+		isPunchingTimer = isPunchingTimerMax
 
 func _on_body_entered(body: Node) -> void:
+	print(body.name)
 	if !body.name.contains('Floor'):
-		collisionAudioPlayer.play()
-		GlobalRoot.GameOverMan()
+		if body.name.contains('Breakable') and isPunching:
+			body.get_node('CollisionShape3D').visible = false
+			body.get_node('CrashParticles').visible = true
+			await get_tree().create_timer(0.5).timeout
+			body.queue_free()
+		else:
+			collisionAudioPlayer.play()
+			$RigidBody3D.visible = false
+			$CrashParticles.emitting = true
+			GlobalRoot.GameOverMan()
 	elif !firstContactFloor: # hit the floor, start runnin
-		dude.StartRunning()
+		StartRunning()
 	else:
 		firstContactFloor = false
-	print(body.name)
 
 func tweenPosition(body, offset: Vector3) -> void:
 	print('tweenPosition %v' % offset)
@@ -64,7 +88,6 @@ func HandleAction(orbName) -> void:
 	if orbName.contains('empty'):
 		return
 		
-	print('handle action %s', orbName)
 	if orbName.contains('left'):
 		if self.position.x > -sideStopRange:
 			#self.position.x += -2
@@ -77,21 +100,44 @@ func HandleAction(orbName) -> void:
 
 	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
 		tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))
-		dude.Jump()
+		Jump()
 	
-	elif orbName.contains('duck') and !ducking and abs(rigidBody.position.y) < 1.5:
+	elif orbName.contains('punch') and !isPunching:
+		isPunching = true
+		print('is punching turned on')
+		Punch()
+	
+	elif orbName.contains('duck') and abs(rigidBody.position.y) < 1.5:
 		rigidBody.collision_mask = 3
 		rigidBody.gravity_scale = 0.0
 		ducking = true
 		
-		dude.Roll()
+		Roll()
 		tweenPosition(rigidBody, Vector3(0, -1, 0))
 	
 	elif orbName.contains('swim'):
 		pass
 	elif orbName.contains('climb'):
 		pass	
-	elif orbName.contains('punch'):
-		pass
 	elif orbName.contains('kick'):
 		pass
+
+func StartRunning() -> void:
+	animPlayer.play('Sprint')
+	
+func Punch() -> void:
+	animPlayer.animation_set_next('Punch_Cross', 'Sprint')
+	animPlayer.play( 'Punch_Cross')
+	
+func Roll() -> void:
+	animPlayer.animation_set_next('Roll', 'Sprint')
+	animPlayer.play('Roll')
+
+func Jump() -> void:
+	animPlayer.play('Jump')
+
+func Swim() -> void:
+	animPlayer.play('Swim')
+
+func SwimIdle() -> void:
+	animPlayer.play('Swim_Idle')
