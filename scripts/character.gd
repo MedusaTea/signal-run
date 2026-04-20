@@ -99,34 +99,31 @@ func HandleAction(orbName) -> void:
 		if self.position.x < sideStopRange:
 			tweenPosition(self, Vector3(sideHop, 0, 0))
 
-
-	# should think more about the jumping but time is tickin	
-	elif isPunching or ducking or abs(rigidBody.position.y) < 0.5:
-		return
-		
-		if orbName.contains('jump'):
-			endDucking()
-			Jump()
-			tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))
-		
-		elif orbName.contains('duck'):
-			ducking = true
-			rigidBody.collision_mask = 3
-			rigidBody.gravity_scale = 0.0
-			duckTimer = duckTimerMax
-			Roll()
-			tweenPosition(rigidBody, Vector3(0, -1, 0))
+	elif !isPunching and !ducking:
+		if abs(rigidBody.position.y) < 0.5:
+			if orbName.contains('jump'):
+				endDucking()
+				Jump()
+				tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))
 			
-		elif orbName.contains('punch'):
-			isPunching = true
-			isPunchingTimer = isPunchingTimerMax
-			Punch()
-	
-		elif orbName.contains('swim'):
-			pass
-			
-		elif orbName.contains('climb'):
-			pass	
+			elif orbName.contains('duck'):
+				ducking = true
+				rigidBody.collision_mask = 3
+				rigidBody.gravity_scale = 0.0
+				duckTimer = duckTimerMax
+				Roll()
+				tweenPosition(rigidBody, Vector3(0, -1, 0))
+				
+			elif orbName.contains('punch'):
+				isPunching = true
+				isPunchingTimer = isPunchingTimerMax
+				Punch()
+		
+			elif orbName.contains('swim'):
+				pass
+				
+			elif orbName.contains('climb'):
+				pass	
 
 func StartRunning() -> void:
 	animPlayer.play('Sprint')
