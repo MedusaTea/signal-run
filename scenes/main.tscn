@@ -191,11 +191,11 @@ script = ExtResource("10_trceg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=2080626345]
 layout_mode = 0
-offset_left = 1375.0001
-offset_top = 325.99997
-offset_right = 1673.0002
-offset_bottom = 481.99997
-scale = Vector2(3.2436202, 3.2381036)
+offset_left = 1757.9999
+offset_top = 182.0
+offset_right = 1846.6661
+offset_bottom = 338.0
+scale = Vector2(2.1097631, 2.1061752)
 
 [node name="AspectRatioContainer2" parent="Control/VBoxContainer" unique_id=755513043 instance=ExtResource("12_0ld40")]
 visible = false

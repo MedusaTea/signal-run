@@ -58,13 +58,11 @@ func endDucking() -> void:
 	duckTimer = duckTimerMax
 
 func _physics_process(delta: float) -> void:
-	
-
 	testTimer -= delta * 20
 	if testTimer < 0:
-		testTimer = testTimerMax
+		testTimer = testTimerMax	
 	
-	$RigidBody3D/FabricCable/Path3D/PathFollow3D.progress = testTimer
+	#$RigidBody3D/FabricCable/Path3D/PathFollow3D.progress = testTimer
 	
 	duckTimer -= delta
 	isPunchingTimer -= delta
