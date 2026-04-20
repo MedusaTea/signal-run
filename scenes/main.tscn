@@ -36,6 +36,7 @@ sky_material = SubResource("ProceduralSkyMaterial_choun")
 [sub_resource type="Environment" id="Environment_tipki"]
 background_mode = 2
 sky = SubResource("Sky_tipki")
+sky_rotation = Vector3(-1.6109389, 0, 0)
 ambient_light_source = 3
 
 [node name="Root" type="Node" unique_id=2065148067]
@@ -46,7 +47,7 @@ script = ExtResource("1_o6xl0")
 [node name="Character" parent="Node3D" unique_id=4821569 instance=ExtResource("1_0wfyh")]
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/Character" unique_id=966227079]
-transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 4.9272947, 3.8944798)
+transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 6.1426697, 3.8944798)
 current = true
 script = ExtResource("3_trceg")
 
