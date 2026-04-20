@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dk8s65gvab6he"]
+
+[sub_resource type="Gradient" id="Gradient_e5q6y"]
+offsets = PackedFloat32Array(0.421659, 0.8294931)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ugowe"]
+noise_type = 2
+frequency = 0.0111
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a05ck"]
+noise = SubResource("FastNoiseLite_ugowe")
+color_ramp = SubResource("Gradient_e5q6y")
+
+[sub_resource type="Gradient" id="Gradient_ugowe"]
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a05ck"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s368e"]
+noise = SubResource("FastNoiseLite_a05ck")
+color_ramp = SubResource("Gradient_ugowe")
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s368e"]
+transparency = 1
+albedo_color = Color(0.42745098, 1, 1, 1)
+albedo_texture = SubResource("NoiseTexture2D_a05ck")
+metallic = 1.0
+metallic_specular = 1.0
+metallic_texture = SubResource("NoiseTexture2D_s368e")
+
+[sub_resource type="QuadMesh" id="QuadMesh_e5q6y"]
+material = SubResource("StandardMaterial3D_s368e")
+
+[node name="SignalEffect" type="Node3D" unique_id=1019181005]
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=946684294]
+amount = 64
+lifetime = 2.0
+speed_scale = 0.5
+explosiveness = 0.42
+randomness = 0.74
+lifetime_randomness = 0.4
+mesh = SubResource("QuadMesh_e5q6y")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(45, -45, 0)
+angle_max = 270.0

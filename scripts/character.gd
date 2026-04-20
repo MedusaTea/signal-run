@@ -9,12 +9,12 @@ extends Node3D
 
 @onready var animPlayer: AnimationPlayer = $RigidBody3D/CollisionShape3D/Dude/AnimationPlayer
 
-@export var jumpHeight = 5
+@export var jumpHeight = 3
 @export var sideStopRange = 6
-@export var sideHop = 4
+@export var sideHop = 6
 
-@export var duckTimerMax = 10.0
-@export var isPunchingTimerMax = 10.0
+@export var duckTimerMax = 3
+@export var isPunchingTimerMax = 3
 
 @export var duckTimer = duckTimerMax
 @export var isPunchingTimer = isPunchingTimerMax
@@ -43,7 +43,6 @@ func GameStart() -> void:
 func _physics_process(delta: float) -> void:
 	duckTimer -= delta
 	isPunchingTimer -= delta
-	
 	if ducking and duckTimer < 0:
 		print('is duck turned off')
 		rigidBody.position.y = 0
@@ -67,7 +66,8 @@ func _on_body_entered(body: Node) -> void:
 			body.get_node('CollisionShape3D').visible = false
 			body.get_node('CrashParticles').visible = true
 			await get_tree().create_timer(0.5).timeout
-			body.queue_free()
+			if body:
+				body.queue_free()
 		else:
 			collisionAudioPlayer.play()
 			$RigidBody3D.visible = false
@@ -99,11 +99,13 @@ func HandleAction(orbName) -> void:
 			tweenPosition(self, Vector3(sideHop, 0, 0))
 
 	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
-		tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))
 		Jump()
+		await get_tree().create_timer(0.1).timeout
+		tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))
 	
-	elif orbName.contains('punch') and !isPunching:
+	elif orbName.contains('punch'):
 		isPunching = true
+		isPunchingTimer = isPunchingTimerMax
 		print('is punching turned on')
 		Punch()
 	
@@ -111,6 +113,7 @@ func HandleAction(orbName) -> void:
 		rigidBody.collision_mask = 3
 		rigidBody.gravity_scale = 0.0
 		ducking = true
+		duckTimer = duckTimerMax
 		
 		Roll()
 		tweenPosition(rigidBody, Vector3(0, -1, 0))
@@ -130,11 +133,13 @@ func Punch() -> void:
 	animPlayer.play( 'Punch_Cross')
 	
 func Roll() -> void:
-	animPlayer.animation_set_next('Roll', 'Sprint')
 	animPlayer.play('Roll')
+	await get_tree().create_timer(0.9).timeout
+	animPlayer.play('Sprint')
 
 func Jump() -> void:
-	animPlayer.play('Jump')
+	animPlayer.animation_set_next('Jump_Start', 'Jump')
+	animPlayer.play('Jump_Start')
 
 func Swim() -> void:
 	animPlayer.play('Swim')

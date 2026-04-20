@@ -2,10 +2,11 @@ extends Node
 
 @export var orbOffset = 115
 @export var orbTopOffset = 20
-@export var pressDelayThreshold = 0.2
+@export var pressDelayThreshold = 0.25
 @export var pressDelay = pressDelayThreshold
 
 @onready var ObstacleSpawnTimer = $ObstacleSpawnTimer
+@onready var ObstaclesScene = get_node('/root/Root/Node3D/Obstacles')
 @onready var Character = get_node('/root/Root/Node3D/Character')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
 @onready var Obstacles = get_node('/root/Root/Node3D/Obstacles')
@@ -21,9 +22,13 @@ extends Node
 
 var orbQueue = []
 var orbNameCounter = 0
+var maxOrbCount = 2
 
 func _ready() -> void:
 	randomize()
+	
+	for i in maxOrbCount:
+		addOrb('empty')
 
 func GameOverMan() -> void:
 	gameOverScreen.visible = true
@@ -32,17 +37,22 @@ func GameOverMan() -> void:
 	
 	var rigidBody
 	for obstacle in Obstacles.get_children():
-		rigidBody = obstacle.get_child(0)
-		if rigidBody: # not sure why this is happening but no biggie rn
-			rigidBody.linear_velocity = Vector3(0,0,0)
+		# not sure why this is happening but no biggie rn
+		if obstacle.get_child_count():
+			rigidBody = obstacle.get_child(0)
+			if rigidBody: 
+				rigidBody.linear_velocity = Vector3(0,0,0)
 
 func GameStart() -> void:
 	gameOverScreen.visible = false
 	startScreen.visible = false
 
-	for i in 6:
+	ObstaclesScene.SpawnNewObstacle()
+
+	for i in maxOrbCount:
 		popOrb()
-			
+		addOrb('empty')
+	
 	for obstacle in Obstacles.get_children():
 		obstacle.queue_free()
 
@@ -67,7 +77,7 @@ func _process(delta: float) -> void:
 
 func addOrb(type) -> void:
 	var orbCount = orbQueue.size()
-	if orbCount > 6:
+	if orbCount > maxOrbCount:
 		return
 	
 	if type != 'empty':
@@ -98,6 +108,8 @@ func addOrb(type) -> void:
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
 
 	orbQueue.push_back(orb)
+	
+	if type != 'empty': popOrb()
 
 func updateAllOrbPositions() -> void:
 	for orb in orbQueue:
