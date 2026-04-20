@@ -14,6 +14,11 @@
 [ext_resource type="AudioStream" uid="uid://c4g68slhqq7w8" path="res://assets/Brick Punch 001.wav" id="10_choun"]
 [ext_resource type="Script" uid="uid://bxm0x61qc1u2a" path="res://scripts/points.gd" id="10_trceg"]
 [ext_resource type="AudioStream" uid="uid://ckmra0k135q8o" path="res://assets/Window Jump 001.wav" id="11_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://brwl3r247jqsl" path="res://scenes/orbs/left.tscn" id="12_0ld40"]
+[ext_resource type="PackedScene" uid="uid://damggie8nfbi3" path="res://scenes/orbs/duck.tscn" id="13_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://clbwxcroygo41" path="res://scenes/orbs/jump.tscn" id="14_yc10j"]
+[ext_resource type="PackedScene" uid="uid://crf43errkklpu" path="res://scenes/orbs/punch.tscn" id="15_jscy8"]
+[ext_resource type="PackedScene" uid="uid://bq2pt6ffwujcy" path="res://scenes/orbs/right.tscn" id="16_pm3ni"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
 noise_type = 4
@@ -183,6 +188,33 @@ offset_bottom = 1250.0
 theme = ExtResource("4_jyhfs")
 text = "Points: 0"
 script = ExtResource("10_trceg")
+
+[node name="HBoxContainer" type="HFlowContainer" parent="Control" unique_id=1299441133]
+layout_mode = 0
+offset_left = 992.99994
+offset_top = 907.0
+offset_right = 1291.0
+offset_bottom = 946.99994
+scale = Vector2(3.2436202, 3.2381036)
+
+[node name="AspectRatioContainer2" parent="Control/HBoxContainer" unique_id=755513043 instance=ExtResource("12_0ld40")]
+layout_mode = 2
+
+[node name="AspectRatioContainer" parent="Control/HBoxContainer" unique_id=534771899 instance=ExtResource("13_gqmmt")]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="AspectRatioContainer3" parent="Control/HBoxContainer" unique_id=346658407 instance=ExtResource("14_yc10j")]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="AspectRatioContainer4" parent="Control/HBoxContainer" unique_id=2127605695 instance=ExtResource("15_jscy8")]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="AspectRatioContainer5" parent="Control/HBoxContainer" unique_id=1289508874 instance=ExtResource("16_pm3ni")]
+layout_mode = 2
+stretch_mode = 1
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="." unique_id=1786186042]
 wait_time = 3.25
