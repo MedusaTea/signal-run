@@ -60,6 +60,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("press_right"): addOrb('right')
 	
 	if Input.is_action_pressed("enter_pressed"): GameStart()
+	if Input.is_action_pressed("space_pressed"): GameStart()
 
 func addOrb(type) -> void:
 	var orbCount = orbQueue.size()
