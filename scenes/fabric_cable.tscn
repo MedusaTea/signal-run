@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://be7golocf8iwd"]
+
+[ext_resource type="PackedScene" uid="uid://bxkjihgl8kwl4" path="res://scenes/electrical_wire.tscn" id="1_dyyw3"]
+[ext_resource type="PackedScene" uid="uid://cr6hxswvs053c" path="res://scenes/electric_pulse.tscn" id="2_y5500"]
+
+[sub_resource type="Curve3D" id="Curve3D_t2dwg"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0.3384285, 0, 0, 0, 0, 0, 0, 0, -1, 1.1529894, 0, 0, 0, 0, 0, 0, 0, -2, 1.833312, 0, 0, 0, 0, 0, 0, 0, -3, 2.4809794, 0, 0, 0, 0, 0, 0, 0, -4, 4, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[node name="FabricCable" type="Node3D" unique_id=415077850]
+
+[node name="Path3D" type="Path3D" parent="." unique_id=445854059]
+curve = SubResource("Curve3D_t2dwg")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=49630011]
+transform = Transform3D(-1.4274877e-07, 0.56052876, 0.8281347, 2.980232e-08, 0.8281347, -0.56052876, -1, -5.5334453e-08, -1.3492027e-07, 0, 0, 0)
+
+[node name="ElectricalWire" parent="Path3D/PathFollow3D" unique_id=1274021021 instance=ExtResource("1_dyyw3")]
+transform = Transform3D(-6.498093e-10, 6.0228933e-09, -1, 0.011743986, -1.0728836e-06, -5.53345e-08, -2.8172508e-07, -0.044639926, -1.3492033e-07, 0, 0, 0)
+visible = false
+
+[node name="ElectricalWire2" parent="Path3D/PathFollow3D" unique_id=774293611 instance=ExtResource("2_y5500")]
+transform = Transform3D(-0.00080420903, -4.795059e-05, -1.3380759, 0.010141311, 0.00012240931, -0.10611619, 3.9792976e-05, -0.032166228, 0.0015915168, 0, 0, 0)

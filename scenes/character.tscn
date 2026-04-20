@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://o8lw3donny11" path="res://scripts/character.gd" id="1_agfs1"]
 [ext_resource type="PackedScene" uid="uid://528ykfilqmwr" path="res://scenes/dude.tscn" id="2_rkhd4"]
+[ext_resource type="PackedScene" uid="uid://be7golocf8iwd" path="res://scenes/fabric_cable.tscn" id="3_lrhn5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sgp6g"]
 
@@ -55,6 +56,9 @@ mesh = SubResource("CylinderMesh_o5qli")
 
 [node name="Dude" parent="RigidBody3D/CollisionShape3D" unique_id=200657034 instance=ExtResource("2_rkhd4")]
 transform = Transform3D(-2.3126175, 0, -3.4919555e-07, 0, 2.3126175, 0, 3.4919555e-07, 0, -2.3126175, 0, 0, 0)
+
+[node name="FabricCable" parent="RigidBody3D" unique_id=415077850 instance=ExtResource("3_lrhn5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06386256, 3.6126301, 0.2601142)
 
 [node name="CrashParticles" type="CPUParticles3D" parent="." unique_id=1586521366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969306, -0.59654117)
