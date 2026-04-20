@@ -144,7 +144,7 @@ func Roll() -> void:
 	animPlayer.play('Roll')
 	# roll animation goes a little too long 
 	# so hack in a play animation to cut it short
-	await get_tree().create_timer(0.9).timeout
+	await get_tree().create_timer(0.7).timeout
 	animPlayer.play('Sprint')
 
 func Jump() -> void:
