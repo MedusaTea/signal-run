@@ -5,6 +5,8 @@ extends Node
 @export var pressDelayThreshold = 0.25
 @export var pressDelay = pressDelayThreshold
 
+#@onready var SignalEffect = $Node3D/SignalEffect/CPUParticles3D
+@onready var PointsLabel = $Control/PointsLabel
 @onready var ObstacleSpawnTimer = $ObstacleSpawnTimer
 @onready var ObstaclesScene = get_node('/root/Root/Node3D/Obstacles')
 @onready var Character = get_node('/root/Root/Node3D/Character')
@@ -13,12 +15,9 @@ extends Node
 @onready var gameOverScreen = get_node('/root/Root/Control/GameOverScreen')
 @onready var startScreen = get_node('/root/Root/Control/StartScreen')
 
-@onready var punchOrbScene = preload("res://scenes/orbs/punch.tscn")
-@onready var leftOrbScene = preload("res://scenes/orbs/left.tscn")
-@onready var rightOrbScene = preload("res://scenes/orbs/right.tscn")
-@onready var duckOrbScene = preload("res://scenes/orbs/duck.tscn")
-@onready var jumpOrbScene = preload("res://scenes/orbs/jump.tscn")
-@onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
+@onready var Orb1 = $Node3D/Character/Transmitter/Orb1
+@onready var Orb2 = $Node3D/Character/Transmitter/Orb2
+#@onready var Orb3 = $Node3D/Character/Transmitter/Orb3
 
 var orbQueue = []
 var orbNameCounter = 0
@@ -32,7 +31,8 @@ func _ready() -> void:
 
 func GameOverMan() -> void:
 	gameOverScreen.visible = true
-	
+
+	PointsLabel.Stop()
 	ObstacleSpawnTimer.stop()
 	
 	var rigidBody
@@ -47,6 +47,8 @@ func GameStart() -> void:
 	gameOverScreen.visible = false
 	startScreen.visible = false
 
+	PointsLabel.Start()
+	
 	ObstaclesScene.SpawnNewObstacle()
 
 	for i in maxOrbCount:
@@ -65,7 +67,6 @@ func _process(delta: float) -> void:
 		return
 	if Input.is_action_pressed("press_punch"): addOrb('punch')
 	if Input.is_action_pressed("press_swim"): addOrb('swim')
-	if Input.is_action_pressed("press_kick"): addOrb('kick')
 	if Input.is_action_pressed("press_climb"): addOrb('climb')
 	if Input.is_action_pressed("press_left"): addOrb('left')
 	if Input.is_action_pressed("press_duck"): addOrb('duck')
@@ -76,50 +77,37 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("space_pressed"): GameStart()
 
 func addOrb(type) -> void:
-	var orbCount = orbQueue.size()
-	
 	if type != 'empty':
 		pressDelay = 0
-		
-	var orb 
+	
+	Orb2.mesh.material.albedo_color = Orb1.mesh.material.albedo_color
+	
 	if type == 'left':
-		orb = leftOrbScene.instantiate()
+		Orb1.mesh.material.albedo_color = '#ff8bff'
 	elif type == 'duck':
-		orb = duckOrbScene.instantiate()
+		Orb1.mesh.material.albedo_color = '#ffff00'
 	elif type == 'jump':
-		orb = jumpOrbScene.instantiate()
+		Orb1.mesh.material.albedo_color = '#618bff'
 	elif type == 'right':
-		orb = rightOrbScene.instantiate()
+		Orb1.mesh.material.albedo_color = '#61ff4e'
 	elif type == 'punch':
-		orb = punchOrbScene.instantiate()
+		Orb1.mesh.material.albedo_color = '#ff004e'
 	elif type == 'empty':
-		orb = emptyOrbScene.instantiate()
+		Orb1.mesh.material.albedo_color = '#000'
 	else:
 		return
-	
-	var viewport = orb.get_node('SubViewportContainer/SubViewport')
-	viewport.get_node('Node3D').position = Vector3(-100, orbCount * 100, 0)
-
-	orb.name = '%s %d' % [type, orbNameCounter]
+		
 	orbNameCounter += 1
-	OrbsControl.add_child(orb)
-	orb.position = Vector2(50+ orbCount * orbOffset, orbTopOffset)
+	orbQueue.push_back('%s %d' % [type, orbNameCounter])
 
-	orbQueue.push_back(orb)
-	
 	if type != 'empty': popOrb()
 
-func updateAllOrbPositions() -> void:
-	for orb in orbQueue:
-		orb.position = orb.position - Vector2(orbOffset, 0)
-	
 func popOrb() -> void:
 	if orbQueue.size() > 0:
 		var orb = orbQueue.pop_front()
-		orb.queue_free()
-		updateAllOrbPositions()
 		if orb:
-			Character.HandleAction(orb.name)
+			#SignalEffect.emitting = true
+			Character.HandleAction(orb)
 		
 func _on_empty_orb_timer_timeout() -> void: 
 	addOrb('empty')

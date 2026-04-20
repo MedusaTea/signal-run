@@ -7,10 +7,12 @@
 [ext_resource type="Script" uid="uid://l4ynwp873kfj" path="res://scripts/camera_mode.gd" id="3_trceg"]
 [ext_resource type="Theme" uid="uid://mk4nu7dkl8b2" path="res://themes/default.tres" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://70teesn04f45" path="res://scripts/fps.gd" id="5_tefeu"]
-[ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://dauymrxgj8prq" path="res://scenes/cable.tscn" id="6_trceg"]
+[ext_resource type="PackedScene" uid="uid://fwfob7syxlfr" path="res://scenes/transmitter.tscn" id="7_jkv2x"]
 [ext_resource type="AudioStream" uid="uid://cxwk3toi8wnlt" path="res://assets/heroes-bgm.wav" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="9_eb6dy"]
 [ext_resource type="AudioStream" uid="uid://c4g68slhqq7w8" path="res://assets/Brick Punch 001.wav" id="10_choun"]
+[ext_resource type="Script" uid="uid://bxm0x61qc1u2a" path="res://scripts/points.gd" id="10_trceg"]
 [ext_resource type="AudioStream" uid="uid://ckmra0k135q8o" path="res://assets/Window Jump 001.wav" id="11_ya4ey"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
@@ -47,9 +49,20 @@ script = ExtResource("1_o6xl0")
 [node name="Character" parent="Node3D" unique_id=4821569 instance=ExtResource("1_0wfyh")]
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/Character" unique_id=966227079]
-transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 6.1426697, 3.8944798)
+transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 6.1426697, 4.3870554)
 current = true
 script = ExtResource("3_trceg")
+
+[node name="Cable" parent="Node3D/Character" unique_id=1067882525 instance=ExtResource("6_trceg")]
+transform = Transform3D(0.038349085, -0.024177128, 0, 0.03785829, 0.024490567, 0, 0, 0, 0.011261283, -1.6573229, 4.6077037, 0.3219123)
+visible = false
+
+[node name="Cable2" parent="Node3D/Character" unique_id=1221567721 instance=ExtResource("6_trceg")]
+transform = Transform3D(0.038349085, -0.024177128, 0, 0.03785829, 0.024490567, 0, 0, 0, 0.011261283, -1.6335156, 8.9074745, 0.3219123)
+visible = false
+
+[node name="Transmitter" parent="Node3D/Character" unique_id=874254877 instance=ExtResource("7_jkv2x")]
+transform = Transform3D(0.36774254, -0.055608418, 0.365553, 0.09042026, 0.5134343, -0.012857508, -0.35853243, 0.072448894, 0.37170088, -3.2304354, 6.096629, 0.3246774)
 
 [node name="Obstacles" type="Node3D" parent="Node3D" unique_id=811346277]
 script = ExtResource("3_eb6dy")
@@ -61,10 +74,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
 environment = SubResource("Environment_tipki")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=544136109]
-transform = Transform3D(1, 0, 0, 0, 0.99208623, 0.12555833, 0, -0.12555833, 0.99208623, 0, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 0.747056, 0.66476107, 0, -0.66476107, 0.747056, 0, 0, 10)
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=754049602]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 10)
+transform = Transform3D(-0.07983087, -0.9829225, -0.16580226, 0.4264078, -0.18401998, 0.88561445, -0.90100133, 0, 0.4338163, 0, 0, 10)
 
 [node name="Control" type="Control" parent="." unique_id=1863188031]
 layout_mode = 3
@@ -73,26 +86,28 @@ offset_right = 1974.0
 offset_bottom = 1080.0
 
 [node name="fps" type="Label" parent="Control" unique_id=507384827]
+visible = false
 layout_mode = 0
-offset_left = 1560.0
-offset_top = -6.0
+offset_left = 1450.0
+offset_top = 6.0
 offset_right = 1955.0
-offset_bottom = 271.0
+offset_bottom = 359.0
 theme = ExtResource("4_jyhfs")
 text = "FPS: 120
 "
 script = ExtResource("5_tefeu")
 
 [node name="QueueBar" type="TextureRect" parent="Control" unique_id=1574263793]
+visible = false
 layout_mode = 0
-offset_left = 20.0
-offset_top = 19.0
-offset_right = 326.0
-offset_bottom = 164.0
-texture = ExtResource("6_tefeu")
+offset_left = 190.0
+offset_top = 6.0
+offset_right = 496.0
+offset_bottom = 151.0
 expand_mode = 1
 
 [node name="Orbs" type="Control" parent="Control/QueueBar" unique_id=700731614]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,6 +116,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control/QueueBar" unique_id=421984152]
+visible = false
 layout_mode = 0
 offset_left = 49.0
 offset_top = 22.0
@@ -138,32 +154,35 @@ theme = ExtResource("4_jyhfs")
 text = "Go Again"
 
 [node name="StartScreen" type="AspectRatioContainer" parent="Control" unique_id=1775003134]
-layout_mode = 0
-offset_right = 1977.0
-offset_bottom = 1092.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 stretch_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="Control/StartScreen" unique_id=1940939697]
 layout_mode = 2
 color = Color(0.5647059, 0.5686275, 0.80784315, 0.72156864)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/StartScreen" unique_id=1989862850]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="Control/StartScreen/VBoxContainer" unique_id=372613571]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_jyhfs")
-text = "[art and stuff go here]"
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="Control/StartScreen/VBoxContainer" unique_id=300257667]
+[node name="Button" type="Button" parent="Control/StartScreen" unique_id=300257667]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_jyhfs")
-text = "Start Game"
+text = "Start"
+alignment = 0
+
+[node name="PointsLabel" type="Label" parent="Control" unique_id=2126955146]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 897.0
+offset_right = 546.0
+offset_bottom = 1250.0
+theme = ExtResource("4_jyhfs")
+text = "Points: 0"
+script = ExtResource("10_trceg")
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="." unique_id=1786186042]
 wait_time = 3.25
@@ -187,7 +206,7 @@ stream = ExtResource("11_ya4ey")
 volume_db = -10.0
 
 [connection signal="button_up" from="Control/GameOverScreen/VBoxContainer/Button" to="." method="_on_restart_button_up"]
-[connection signal="button_up" from="Control/StartScreen/VBoxContainer/Button" to="." method="_on_start_button_up"]
+[connection signal="button_up" from="Control/StartScreen/Button" to="." method="_on_start_button_up"]
 [connection signal="timeout" from="ObstacleSpawnTimer" to="Node3D/Obstacles" method="_on_test_spawn_timer_timeout"]
 [connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]
 [connection signal="timeout" from="PopOrbTimer" to="." method="_on_pop_orb_timer_timeout"]

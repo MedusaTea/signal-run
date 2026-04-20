@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dauymrxgj8prq"]
+
+[ext_resource type="PackedScene" uid="uid://bxkjihgl8kwl4" path="res://scenes/electrical_wire.tscn" id="1_rj3a4"]
+
+[node name="Cable" type="Node3D" unique_id=1067882525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.011261284, 0, 0, 0)
+
+[node name="ElectricalWire" parent="." unique_id=1274021021 instance=ExtResource("1_rj3a4")]
+
+[node name="ElectricalWire2" parent="." unique_id=234584970 instance=ExtResource("1_rj3a4")]
+transform = Transform3D(-0.9992056, 0.03985285, 0, -0.03985285, -0.9992056, 0, 0, 0, 1, -0.22057569, 12.309655, 0)
+
+[node name="ElectricalWire3" parent="." unique_id=742301323 instance=ExtResource("1_rj3a4")]
+transform = Transform3D(0.9992056, -0.039852764, 0, 0.039852764, 0.9992056, 0, 0, 0, 1, -0.71613026, 24.734411, 0)
+
+[node name="ElectricalWire4" parent="." unique_id=451571375 instance=ExtResource("1_rj3a4")]
+transform = Transform3D(-0.9992056, 0.03985285, 0, -0.03985285, -0.9992056, 0, 0, 0, 1, -1.2063118, 37.024452, 0)
+
+[node name="ElectricalWire5" parent="." unique_id=1858128396 instance=ExtResource("1_rj3a4")]
+transform = Transform3D(0.98607445, -0.16630407, 0, 0.16630407, 0.98607445, 0, 0, 0, 1, 5.215024, -48.815506, 0)
+
+[node name="ElectricalWire6" parent="." unique_id=533560587 instance=ExtResource("1_rj3a4")]
+transform = Transform3D(-0.98607445, 0.16630416, 0, -0.16630416, -0.98607445, 0, 0, 0, 1, 3.1695156, -36.68697, 0)
+
+[node name="ElectricalWire7" parent="." unique_id=415859152 instance=ExtResource("1_rj3a4")]
+transform = Transform3D(0.98607445, -0.16630407, 0, 0.16630407, 0.98607445, 0, 0, 0, 1, 1.1015849, -24.425493, 0)
+
+[node name="ElectricalWire8" parent="." unique_id=1457220761 instance=ExtResource("1_rj3a4")]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -12.11948, 0)

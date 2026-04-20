@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bxkjihgl8kwl4"]
+
+[sub_resource type="Curve" id="Curve_h85dg"]
+_data = [Vector2(0.010563381, 0.6404996), 0.0, 0.0, 0, 0, Vector2(0.26584506, 0.5269046), 0.0, 0.0, 0, 0, Vector2(0.40845072, 0.55738926), 0.0, 0.0, 0, 0, Vector2(0.7306338, 0.6410365), 0.0, 0.0, 0, 0, Vector2(0.95774645, 0.9190031), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_h85dg"]
+offsets = PackedFloat32Array(0.30567685, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.80049086, 0.80049074, 0.80049074, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h85dg"]
+seed = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tl7q8"]
+noise = SubResource("FastNoiseLite_h85dg")
+color_ramp = SubResource("Gradient_h85dg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eb80y"]
+albedo_color = Color(0.19614312, 0.19614306, 0.19614309, 1)
+albedo_texture = SubResource("NoiseTexture2D_tl7q8")
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_tl7q8"]
+material = SubResource("StandardMaterial3D_eb80y")
+shape = 0
+size = 6.05
+sections = 64
+section_segments = 5
+curve = SubResource("Curve_h85dg")
+
+[node name="ElectricalWire" type="Node3D" unique_id=1274021021]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1717562869]
+mesh = SubResource("RibbonTrailMesh_tl7q8")

@@ -33,14 +33,15 @@ metallic_texture = SubResource("NoiseTexture2D_s368e")
 
 [sub_resource type="QuadMesh" id="QuadMesh_e5q6y"]
 material = SubResource("StandardMaterial3D_s368e")
+size = Vector2(0.3, 0.3)
 
 [node name="SignalEffect" type="Node3D" unique_id=1019181005]
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=946684294]
+emitting = false
 amount = 64
-lifetime = 2.0
-speed_scale = 0.5
-explosiveness = 0.42
+lifetime = 0.24000000000000002
+speed_scale = 12.07
 randomness = 0.74
 lifetime_randomness = 0.4
 mesh = SubResource("QuadMesh_e5q6y")
