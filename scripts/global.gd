@@ -77,8 +77,6 @@ func _process(delta: float) -> void:
 
 func addOrb(type) -> void:
 	var orbCount = orbQueue.size()
-	if orbCount > maxOrbCount:
-		return
 	
 	if type != 'empty':
 		pressDelay = 0
