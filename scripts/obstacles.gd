@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var minSpawnDistance = 300
+@export var minSpawnDistance = 80
 @export var terrainSpeed = 40
 
 @onready var GlobalRoot = get_node('/root/Root')

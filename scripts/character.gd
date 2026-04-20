@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		rigidBody.gravity_scale = 1.0
 		ducking = false
 		duckTimer = duckTimerMax
-		StartRunning()
+		
 		
 	if ducking:
 		rigidBody.position.y = -1
@@ -58,17 +58,20 @@ func _physics_process(delta: float) -> void:
 		StartRunning()
 
 func _on_body_entered(body: Node) -> void:
+	print(body.name)
 	if !body.name.contains('Floor'):
-		if body.name.contains('Breakable') and isPunching:
+		if body.name.contains('Breakable'):
+			body.get_node('CollisionShape3D').visible = false
+			body.get_node('CrashParticles').visible = true
+			await get_tree().create_timer(1.0).timeout
 			body.queue_free()
-		else:	
+		else:
 			collisionAudioPlayer.play()
 			GlobalRoot.GameOverMan()
 	elif !firstContactFloor: # hit the floor, start runnin
 		StartRunning()
 	else:
 		firstContactFloor = false
-	print(body.name)
 
 func tweenPosition(body, offset: Vector3) -> void:
 	print('tweenPosition %v' % offset)
@@ -122,6 +125,9 @@ func Punch() -> void:
 	
 func Roll() -> void:
 	animPlayer.play('Roll')
+
+#	await get_tree().create_timer(1.0).timeout # waits for 1 second	
+	#animPlayer.animation_set_next('Idle', 'Sprint')
 	
 func Jump() -> void:
 	animPlayer.play('Jump')
