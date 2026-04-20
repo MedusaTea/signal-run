@@ -13,8 +13,8 @@ extends Node3D
 @export var sideStopRange = 6
 @export var sideHop = 4
 
-@export var duckTimerMax = 2.0
-@export var isPunchingTimerMax = 2.0
+@export var duckTimerMax = 10.0
+@export var isPunchingTimerMax = 10.0
 
 @export var duckTimer = duckTimerMax
 @export var isPunchingTimer = isPunchingTimerMax
@@ -28,6 +28,8 @@ func _ready() -> void:
 	pass
 
 func GameStart() -> void:
+	$CrashParticles.emitting = false
+	$RigidBody3D.visible = true
 	rotation = Vector3(0,0,0)
 	position = Vector3(0,0,0)
 	
@@ -43,30 +45,33 @@ func _physics_process(delta: float) -> void:
 	isPunchingTimer -= delta
 	
 	if ducking and duckTimer < 0:
+		print('is duck turned off')
 		rigidBody.position.y = 0
 		rigidBody.collision_mask = 7
 		rigidBody.gravity_scale = 1.0
 		ducking = false
 		duckTimer = duckTimerMax
 		
-		
 	if ducking:
 		rigidBody.position.y = -1
 		
 	if isPunching and isPunchingTimer < 0:
+		print('is punching turned off')
 		isPunching = false
-		StartRunning()
+		isPunchingTimer = isPunchingTimerMax
 
 func _on_body_entered(body: Node) -> void:
 	print(body.name)
 	if !body.name.contains('Floor'):
-		if body.name.contains('Breakable'):
+		if body.name.contains('Breakable') and isPunching:
 			body.get_node('CollisionShape3D').visible = false
 			body.get_node('CrashParticles').visible = true
-			await get_tree().create_timer(1.0).timeout
+			await get_tree().create_timer(0.5).timeout
 			body.queue_free()
 		else:
 			collisionAudioPlayer.play()
+			$RigidBody3D.visible = false
+			$CrashParticles.emitting = true
 			GlobalRoot.GameOverMan()
 	elif !firstContactFloor: # hit the floor, start runnin
 		StartRunning()
@@ -83,7 +88,6 @@ func HandleAction(orbName) -> void:
 	if orbName.contains('empty'):
 		return
 		
-	print('handle action %s', orbName)
 	if orbName.contains('left'):
 		if self.position.x > -sideStopRange:
 			#self.position.x += -2
@@ -100,6 +104,7 @@ func HandleAction(orbName) -> void:
 	
 	elif orbName.contains('punch') and !isPunching:
 		isPunching = true
+		print('is punching turned on')
 		Punch()
 	
 	elif orbName.contains('duck') and abs(rigidBody.position.y) < 1.5:
@@ -121,14 +126,13 @@ func StartRunning() -> void:
 	animPlayer.play('Sprint')
 
 func Punch() -> void:
+	animPlayer.animation_set_next('Punch_Cross', 'Sprint')
 	animPlayer.play( 'Punch_Cross')
 	
 func Roll() -> void:
+	animPlayer.animation_set_next('Roll', 'Sprint')
 	animPlayer.play('Roll')
 
-#	await get_tree().create_timer(1.0).timeout # waits for 1 second	
-	#animPlayer.animation_set_next('Idle', 'Sprint')
-	
 func Jump() -> void:
 	animPlayer.play('Jump')
 
@@ -137,6 +141,3 @@ func Swim() -> void:
 
 func SwimIdle() -> void:
 	animPlayer.play('Swim_Idle')
-
-func PunchJab() -> void:
-	animPlayer.play('Punch_Jab')

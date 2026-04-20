@@ -30,8 +30,11 @@ func GameOverMan() -> void:
 	
 	ObstacleSpawnTimer.stop()
 	
+	var rigidBody
 	for obstacle in Obstacles.get_children():
-		obstacle.get_child(0).linear_velocity = Vector3(0,0,0)
+		rigidBody = obstacle.get_child(0)	
+		if rigidBody: # not sure why this is happening but no biggie rn
+			rigidBody.linear_velocity = Vector3(0,0,0)
 
 func GameStart() -> void:
 	gameOverScreen.visible = false

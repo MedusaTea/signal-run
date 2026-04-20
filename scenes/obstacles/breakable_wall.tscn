@@ -29,7 +29,7 @@ roughness_texture = SubResource("NoiseTexture2D_vivg5")
 material = SubResource("StandardMaterial3D_lswbm")
 
 [sub_resource type="Gradient" id="Gradient_n03lo"]
-colors = PackedColorArray(0, 0.15686275, 0.30588236, 0, 1, 1, 1, 1)
+colors = PackedColorArray(1.4439226e-07, 0.15105513, 0.29588115, 1, 1, 1, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vivg5"]
 noise_type = 2
@@ -44,13 +44,13 @@ cellular_return_type = 0
 noise = SubResource("FastNoiseLite_vivg5")
 color_ramp = SubResource("Gradient_n03lo")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tf6w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpv2p"]
 transparency = 1
 albedo_color = Color(0.4627451, 1, 1, 0.1254902)
 albedo_texture = SubResource("NoiseTexture2D_vpv2p")
 
 [sub_resource type="QuadMesh" id="QuadMesh_dfng7"]
-material = SubResource("StandardMaterial3D_4tf6w")
+material = SubResource("StandardMaterial3D_vpv2p")
 size = Vector2(3, 3)
 
 [node name="BreakableWall" type="Node3D" unique_id=1340641046]
