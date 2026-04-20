@@ -2,6 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://baej2pf4uvr4t" path="res://assets/AnimationLibrary_Godot_Standard.glb" id="1_hkfyu"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkfyu"]
+albedo_color = Color(0.5429818, 0.5429818, 0.54298174, 1)
+metallic = 0.25
+metallic_specular = 1.0
+roughness = 0.0
+refraction_enabled = true
+
 [node name="Dude" unique_id=200657034 instance=ExtResource("1_hkfyu")]
 
 [node name="Skeleton3D" parent="Rig" parent_id_path=PackedInt32Array(703809896) index="0" unique_id=2053086255]
@@ -57,3 +64,6 @@ bones/49/rotation = Quaternion(0.80680376, -0.40266332, 0.049647298, 0.42949405)
 bones/50/rotation = Quaternion(0.7994693, 0.16463251, -0.25358087, 0.51907784)
 bones/51/rotation = Quaternion(-0.8417817, -0.100251384, -0.16000594, 0.5057187)
 bones/52/rotation = Quaternion(-0.00013706369, 0.9643068, -0.26478708, -0.00049941504)
+
+[node name="Mannequin" parent="Rig/Skeleton3D" index="0" unique_id=87309516]
+surface_material_override/0 = SubResource("StandardMaterial3D_hkfyu")

@@ -5,6 +5,7 @@ extends Node
 @export var pressDelayThreshold = 0.25
 @export var pressDelay = pressDelayThreshold
 
+@onready var PointsLabel = $Control/PointsLabel
 @onready var ObstacleSpawnTimer = $ObstacleSpawnTimer
 @onready var ObstaclesScene = get_node('/root/Root/Node3D/Obstacles')
 @onready var Character = get_node('/root/Root/Node3D/Character')
@@ -32,7 +33,8 @@ func _ready() -> void:
 
 func GameOverMan() -> void:
 	gameOverScreen.visible = true
-	
+
+	PointsLabel.Stop()
 	ObstacleSpawnTimer.stop()
 	
 	var rigidBody
@@ -47,6 +49,8 @@ func GameStart() -> void:
 	gameOverScreen.visible = false
 	startScreen.visible = false
 
+	PointsLabel.Start()
+	
 	ObstaclesScene.SpawnNewObstacle()
 
 	for i in maxOrbCount:
