@@ -40,24 +40,31 @@ func GameStart() -> void:
 	
 	StartRunning()
 	
+func endPunching() -> void:
+	print('is punching turned off')
+	isPunching = false
+	isPunchingTimer = isPunchingTimerMax
+	
+func endDucking() -> void:
+	print('is duck turned off')
+	rigidBody.position.y = 0
+	rigidBody.collision_mask = 7
+	rigidBody.gravity_scale = 1.0
+	ducking = false
+	duckTimer = duckTimerMax
+
 func _physics_process(delta: float) -> void:
 	duckTimer -= delta
 	isPunchingTimer -= delta
-	if ducking and duckTimer < 0:
-		print('is duck turned off')
-		rigidBody.position.y = 0
-		rigidBody.collision_mask = 7
-		rigidBody.gravity_scale = 1.0
-		ducking = false
-		duckTimer = duckTimerMax
-		
+	
 	if ducking:
 		rigidBody.position.y = -1
-		
+
+	if ducking and duckTimer < 0:
+		endDucking()
+
 	if isPunching and isPunchingTimer < 0:
-		print('is punching turned off')
-		isPunching = false
-		isPunchingTimer = isPunchingTimerMax
+		endPunching()
 
 func _on_body_entered(body: Node) -> void:
 	print(body.name)
@@ -99,6 +106,7 @@ func HandleAction(orbName) -> void:
 			tweenPosition(self, Vector3(sideHop, 0, 0))
 
 	elif orbName.contains('jump') and abs(rigidBody.position.y) < 1.5:
+		endDucking()
 		Jump()
 		await get_tree().create_timer(0.1).timeout
 		tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))

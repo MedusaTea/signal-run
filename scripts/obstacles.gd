@@ -17,7 +17,7 @@ var breakableIndex = 2
 var obstacleNameCounter = 0
 
 func SpawnNewObstacle(spawnOffset=0) -> void:
-	var index = logIndex #randi() % obstacles.size()
+	var index = randi() % obstacles.size()
 	var newNode = obstacles[index].instantiate()
 	
 	newNode.name = '%s %d' % [newNode.name, obstacleNameCounter]
