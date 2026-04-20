@@ -25,7 +25,7 @@ extends Node3D
 var firstContactFloor = true
 
 func _ready() -> void:
-	animPlayer.speed_scale = 1.25
+	animPlayer.speed_scale = 1.5
 
 func GameStart() -> void:
 	$CrashParticles.emitting = false
