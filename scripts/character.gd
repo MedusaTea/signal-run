@@ -98,7 +98,7 @@ func HandleAction(orbName) -> void:
 			#self.position.x += 2
 			tweenPosition(self, Vector3(sideHop, 0, 0))
 
-	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
+	elif orbName.contains('jump') and abs(rigidBody.position.y) < 1.5:
 		Jump()
 		await get_tree().create_timer(0.1).timeout
 		tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))

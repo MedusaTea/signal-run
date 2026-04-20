@@ -17,7 +17,7 @@ var breakableIndex = 2
 var obstacleNameCounter = 0
 
 func SpawnNewObstacle(spawnOffset=0) -> void:
-	var index = randi() % obstacles.size()
+	var index = logIndex #randi() % obstacles.size()
 	var newNode = obstacles[index].instantiate()
 	
 	newNode.name = '%s %d' % [newNode.name, obstacleNameCounter]
@@ -27,7 +27,7 @@ func SpawnNewObstacle(spawnOffset=0) -> void:
 	var leftOrRight = randi() % 2
 	if leftOrRight == 0:
 		if index == logIndex:
-			modifier.y = 2
+			modifier.y = 1.5
 			var mesh = newNode.get_child(0).get_child(0).get_child(0).mesh
 			mesh.material.albedo_color = '#fff'
 						

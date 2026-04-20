@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://70teesn04f45" path="res://scripts/fps.gd" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://smha1e5gs08h" path="res://assets/queue-bar.png" id="6_tefeu"]
 [ext_resource type="AudioStream" uid="uid://cxwk3toi8wnlt" path="res://assets/heroes-bgm.wav" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="9_eb6dy"]
 [ext_resource type="AudioStream" uid="uid://c4g68slhqq7w8" path="res://assets/Brick Punch 001.wav" id="10_choun"]
 [ext_resource type="AudioStream" uid="uid://ckmra0k135q8o" path="res://assets/Window Jump 001.wav" id="11_ya4ey"]
 
@@ -85,7 +86,7 @@ script = ExtResource("5_tefeu")
 layout_mode = 0
 offset_left = 20.0
 offset_top = 19.0
-offset_right = 435.0
+offset_right = 326.0
 offset_bottom = 164.0
 texture = ExtResource("6_tefeu")
 expand_mode = 1
@@ -97,6 +98,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/QueueBar" unique_id=421984152]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 22.0
+offset_right = 173.0
+offset_bottom = 145.0
+scale = Vector2(0.8232351, 0.83246994)
+texture = ExtResource("9_eb6dy")
 
 [node name="GameOverScreen" type="AspectRatioContainer" parent="Control" unique_id=154508587]
 visible = false

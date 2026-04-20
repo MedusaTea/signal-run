@@ -105,7 +105,7 @@ func addOrb(type) -> void:
 	orb.name = '%s %d' % [type, orbNameCounter]
 	orbNameCounter += 1
 	OrbsControl.add_child(orb)
-	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
+	orb.position = Vector2(50+ orbCount * orbOffset, orbTopOffset)
 
 	orbQueue.push_back(orb)
 	

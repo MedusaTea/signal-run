@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://damggie8nfbi3"]
 
 [ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="1_jds3w"]
+[ext_resource type="Theme" uid="uid://mk4nu7dkl8b2" path="res://themes/default.tres" id="2_exmxl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktqa0"]
 transparency = 1
@@ -50,3 +51,10 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -76.
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=1664379283]
 transform = Transform3D(-0.060637623, 0.50946003, 0.85835516, 0.71442133, -0.57840157, 0.3937685, 0.69708335, 0.6371044, -0.32889622, 0, 0, 0)
+
+[node name="Label" type="Label" parent="." unique_id=1111427671]
+layout_mode = 2
+theme = ExtResource("2_exmxl")
+theme_override_font_sizes/font_size = 20
+text = "DUCK"
+horizontal_alignment = 1
