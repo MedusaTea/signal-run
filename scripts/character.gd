@@ -25,7 +25,7 @@ extends Node3D
 var firstContactFloor = true
 
 func _ready() -> void:
-	pass
+	animPlayer.speed_scale = 1.25
 
 func GameStart() -> void:
 	$CrashParticles.emitting = false
@@ -124,7 +124,7 @@ func HandleAction(orbName) -> void:
 
 func StartRunning() -> void:
 	animPlayer.play('Sprint')
-
+	
 func Punch() -> void:
 	animPlayer.animation_set_next('Punch_Cross', 'Sprint')
 	animPlayer.play( 'Punch_Cross')
