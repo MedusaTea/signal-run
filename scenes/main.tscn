@@ -152,9 +152,8 @@ size_flags_vertical = 4
 theme = ExtResource("4_jyhfs")
 text = "Start Game"
 
-[node name="TestSpawnTimer" type="Timer" parent="." unique_id=1786186042]
+[node name="ObstacleSpawnTimer" type="Timer" parent="." unique_id=1786186042]
 wait_time = 2.002
-autostart = true
 
 [node name="EmptyOrbTimer" type="Timer" parent="." unique_id=1831977328]
 wait_time = 0.5
@@ -166,6 +165,7 @@ autostart = true
 
 [node name="bgmAudio" type="AudioStreamPlayer" parent="." unique_id=727056293]
 stream = ExtResource("9_85g3d")
+autoplay = true
 
 [node name="collisionAudio" type="AudioStreamPlayer" parent="." unique_id=2071889912]
 stream = ExtResource("10_choun")
@@ -177,6 +177,6 @@ volume_db = -10.0
 
 [connection signal="button_up" from="Control/GameOverScreen/VBoxContainer/Button" to="." method="_on_restart_button_up"]
 [connection signal="button_up" from="Control/StartScreen/VBoxContainer/Button" to="." method="_on_start_button_up"]
-[connection signal="timeout" from="TestSpawnTimer" to="Node3D/TerrainObjects" method="_on_test_spawn_timer_timeout"]
+[connection signal="timeout" from="ObstacleSpawnTimer" to="Node3D/TerrainObjects" method="_on_test_spawn_timer_timeout"]
 [connection signal="timeout" from="EmptyOrbTimer" to="." method="_on_empty_orb_timer_timeout"]
 [connection signal="timeout" from="PopOrbTimer" to="." method="_on_pop_orb_timer_timeout"]

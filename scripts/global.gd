@@ -6,6 +6,7 @@ extends Node
 @export var pressDelay = pressDelayThreshold
 @export var terrainSpeed = 30
 
+@onready var ObstacleSpawnTimer = $ObstacleSpawnTimer
 @onready var Character = get_node('/root/Root/Node3D/Character')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
 @onready var TerrainObjects = get_node('/root/Root/Node3D/TerrainObjects')
@@ -25,7 +26,9 @@ func _ready() -> void:
 
 func GameOverMan() -> void:
 	gameOverScreen.visible = true
-
+	
+	ObstacleSpawnTimer.stop()
+	
 	for terrain in TerrainObjects.get_children():
 		terrain.get_child(0).linear_velocity = Vector3(0,0,0)
 
@@ -39,6 +42,7 @@ func GameStart() -> void:
 	for terrain in TerrainObjects.get_children():
 		terrain.queue_free()
 
+	ObstacleSpawnTimer.start()
 	Character.GameStart()
 	
 func _process(delta: float) -> void:
