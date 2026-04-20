@@ -2,23 +2,12 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sgp6g"]
 
-[sub_resource type="Gradient" id="Gradient_c41w6"]
-colors = PackedColorArray(0, 0, 0, 1, 0.5647059, 0.4117647, 0.49411765, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_c41w6"]
-noise_type = 0
-seed = 9
-frequency = 0.0151
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ukw5w"]
-noise = SubResource("FastNoiseLite_c41w6")
-color_ramp = SubResource("Gradient_c41w6")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
 resource_local_to_scene = true
-albedo_texture = SubResource("NoiseTexture2D_ukw5w")
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sgp6g"]
+lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_sgp6g")
 
 [node name="Floor" type="RigidBody3D" unique_id=2004801252]

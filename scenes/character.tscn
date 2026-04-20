@@ -54,7 +54,7 @@ visible = false
 mesh = SubResource("CylinderMesh_o5qli")
 
 [node name="Dude" parent="RigidBody3D/CollisionShape3D" unique_id=200657034 instance=ExtResource("2_rkhd4")]
-transform = Transform3D(-1.6, 0, -2.4159328e-07, 0, 1.6, 0, 2.4159328e-07, 0, -1.6, 0, 0, 0)
+transform = Transform3D(-2.3126175, 0, -3.4919555e-07, 0, 2.3126175, 0, 3.4919555e-07, 0, -2.3126175, 0, 0, 0)
 
 [node name="CrashParticles" type="CPUParticles3D" parent="." unique_id=1586521366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969306, -0.59654117)

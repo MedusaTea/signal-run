@@ -11,10 +11,12 @@ noise = SubResource("FastNoiseLite_gvwyr")
 seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
+resource_local_to_scene = true
 albedo_color = Color(0.62352943, 0.3882353, 0.16862746, 1)
 albedo_texture = SubResource("NoiseTexture2D_spugk")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_85g3d"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_tipki")
 
 [node name="Log" type="Node3D" unique_id=238117868]

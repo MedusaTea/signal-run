@@ -1,10 +1,18 @@
-[gd_scene format=3 uid="uid://iy3kmhkjemeq"]
+[gd_scene format=3 uid="uid://bgw170ppfqpra"]
 
 [ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="1_pnn83"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktqa0"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.4745098)
+albedo_color = Color(0, 0, 0, 0.3137255)
+metallic = 0.2
+metallic_specular = 1.0
+roughness = 0.5
+rim_enabled = true
+rim_tint = 0.93
+clearcoat = 0.0
+clearcoat_roughness = 1.0
+refraction_enabled = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_ktqa0"]
 material = SubResource("StandardMaterial3D_ktqa0")
@@ -14,6 +22,7 @@ offset_right = 101.326
 offset_bottom = 105.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=846135846]
+visible = false
 layout_mode = 2
 texture = ExtResource("1_pnn83")
 expand_mode = 1
@@ -27,9 +36,10 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(101, 101)
+render_target_clear_mode = 1
 render_target_update_mode = 4
 
-[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=423006360]
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=495541717]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=641631598]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.33281, 0, 15.88246)
@@ -37,4 +47,6 @@ mesh = SubResource("SphereMesh_ktqa0")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=1329616451]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -76.4285, 0, 15.878212)
-current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=1664379283]
+transform = Transform3D(-0.060637623, 0.50946003, 0.85835516, 0.71442133, -0.57840157, 0.3937685, 0.69708335, 0.6371044, -0.32889622, 0, 0, 0)
