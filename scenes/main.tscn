@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cxwk3toi8wnlt" path="res://assets/heroes-bgm.wav" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="9_eb6dy"]
 [ext_resource type="AudioStream" uid="uid://c4g68slhqq7w8" path="res://assets/Brick Punch 001.wav" id="10_choun"]
+[ext_resource type="Script" uid="uid://bxm0x61qc1u2a" path="res://scripts/points.gd" id="10_trceg"]
 [ext_resource type="AudioStream" uid="uid://ckmra0k135q8o" path="res://assets/Window Jump 001.wav" id="11_ya4ey"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
@@ -73,11 +74,12 @@ offset_right = 1974.0
 offset_bottom = 1080.0
 
 [node name="fps" type="Label" parent="Control" unique_id=507384827]
+visible = false
 layout_mode = 0
-offset_left = 1560.0
-offset_top = -6.0
+offset_left = 1450.0
+offset_top = 6.0
 offset_right = 1955.0
-offset_bottom = 271.0
+offset_bottom = 359.0
 theme = ExtResource("4_jyhfs")
 text = "FPS: 120
 "
@@ -164,6 +166,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("4_jyhfs")
 text = "Start Game"
+
+[node name="points" type="Label" parent="Control" unique_id=2126955146]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 897.0
+offset_right = 546.0
+offset_bottom = 1250.0
+theme = ExtResource("4_jyhfs")
+text = "Points: 0"
+script = ExtResource("10_trceg")
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="." unique_id=1786186042]
 wait_time = 3.25
