@@ -7,7 +7,8 @@ extends Node3D
 
 @onready var obstacles = [
 	preload("res://scenes/obstacles/log.tscn"),
-	preload("res://scenes/obstacles/terrain_test.tscn")
+	preload("res://scenes/obstacles/terrain_test.tscn"),
+	preload("res://scenes/obstacles/breakable_wall.tscn"),
 ]
 
 var obstacleNameCounter = 0
