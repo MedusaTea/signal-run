@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var minSpawnDistance = 150
+@export var minSpawnDistance = 300
 @export var terrainSpeed = 40
 
 @onready var GlobalRoot = get_node('/root/Root')
@@ -14,7 +14,7 @@ extends Node3D
 var obstacleNameCounter = 0
 
 func SpawnNewObstacle(spawnOffset=0) -> void:
-	var index = randi() % obstacles.size()
+	var index = 2#randi() % obstacles.size()
 	var newNode = obstacles[index].instantiate()
 	
 	newNode.name = '%s %d' % [newNode.name, obstacleNameCounter]
