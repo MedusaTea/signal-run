@@ -7,6 +7,7 @@ extends Node3D
 @onready var moveAudioPlayer = get_node('/root/Root/moveAudio')
 @onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
 
+@export var jumpHeight = 5
 @export var sideStopRange = 6
 @export var sideHop = 4
 @export var duckTimerMax = 2.0
@@ -75,7 +76,7 @@ func HandleAction(orbName) -> void:
 			tweenPosition(self, Vector3(sideHop, 0, 0))
 
 	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
-		tweenPosition(rigidBody, Vector3(0, 4, 0))
+		tweenPosition(rigidBody, Vector3(0, jumpHeight, 0))
 		dude.Jump()
 	
 	elif orbName.contains('duck') and !ducking and abs(rigidBody.position.y) < 1.5:

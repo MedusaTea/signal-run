@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bcevh4btj3504"]
+
+[ext_resource type="Texture2D" uid="uid://bcbhpmxiggwsj" path="res://assets/holding_new_noise_texture_2d.tres" id="1_n03lo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lswbm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n03lo"]
+noise_type = 2
+frequency = 1.0
+fractal_octaves = 4
+fractal_lacunarity = 10.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vivg5"]
+noise = SubResource("FastNoiseLite_n03lo")
+seamless = true
+invert = true
+in_3d_space = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lswbm"]
+transparency = 1
+albedo_color = Color(0.6252583, 0.76194924, 0.7481315, 0.5254902)
+metallic = 1.0
+metallic_specular = 1.0
+metallic_texture = ExtResource("1_n03lo")
+roughness = 0.38
+roughness_texture = SubResource("NoiseTexture2D_vivg5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_n03lo"]
+material = SubResource("StandardMaterial3D_lswbm")
+
+[node name="BreakableWall" type="Node3D" unique_id=1340641046]
+
+[node name="BreakableRigidBody3D" type="RigidBody3D" parent="." unique_id=1708011756]
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakableRigidBody3D" unique_id=1013693820]
+transform = Transform3D(13.744925, 0, 0, 0, 14.037062, 0, 0, 0, 1, 0, 6.6967216, 0)
+shape = SubResource("BoxShape3D_lswbm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BreakableRigidBody3D/CollisionShape3D" unique_id=1943598911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016879082, 0)
+mesh = SubResource("BoxMesh_n03lo")
