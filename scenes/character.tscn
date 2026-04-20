@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://riqpxrrct3c2"]
 
 [ext_resource type="Script" uid="uid://o8lw3donny11" path="res://scripts/character.gd" id="1_agfs1"]
+[ext_resource type="PackedScene" uid="uid://528ykfilqmwr" path="res://scenes/dude.tscn" id="2_rkhd4"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sgp6g"]
 
@@ -23,6 +24,10 @@ max_contacts_reported = 10
 shape = SubResource("CylinderShape3D_sgp6g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D" unique_id=2083461854]
+visible = false
 mesh = SubResource("CylinderMesh_o5qli")
+
+[node name="Dude" parent="RigidBody3D/CollisionShape3D" unique_id=200657034 instance=ExtResource("2_rkhd4")]
+transform = Transform3D(-1.6, 0, -2.4159328e-07, 0, 1.6, 0, 2.4159328e-07, 0, -1.6, 0, 0, 0)
 
 [connection signal="body_entered" from="RigidBody3D" to="." method="_on_body_entered"]

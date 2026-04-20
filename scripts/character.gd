@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var GlobalRoot = get_node('/root/Root')
 @onready var rigidBody = $RigidBody3D
-#@onready var dude = $RigidBody3D/CollisionShape3D/Dude
+@onready var dude = $RigidBody3D/CollisionShape3D/Dude
 @onready var collisionAudioPlayer = get_node('/root/Root/collisionAudio')
 @onready var moveAudioPlayer = get_node('/root/Root/moveAudio')
 @onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
@@ -28,7 +28,7 @@ func GameStart() -> void:
 	rigidBody.linear_velocity = Vector3(0,0,0)
 	rigidBody.angular_velocity = Vector3(0,0,0)
 	
-	#dude.StartRunning()
+	dude.StartRunning()
 	
 func _physics_process(delta: float) -> void:
 	duckTimer -= delta
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		rigidBody.gravity_scale = 1.0
 		ducking = false
 		duckTimer = duckTimerMax
-		#dude.StartRunning()
+		dude.StartRunning()
 		
 	if ducking:
 		rigidBody.position.y = -1
@@ -47,8 +47,8 @@ func _on_body_entered(body: Node) -> void:
 	if !body.name.contains('Floor'):
 		collisionAudioPlayer.play()
 		GlobalRoot.GameOverMan()
-	#elif !firstContactFloor: # hit the floor, start runnin
-		#dude.StartRunning()
+	elif !firstContactFloor: # hit the floor, start runnin
+		dude.StartRunning()
 	else:
 		firstContactFloor = false
 	print(body.name)
@@ -71,14 +71,14 @@ func HandleAction(orbName) -> void:
 
 	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
 		tweenPosition(rigidBody, Vector3(0, 4, 0))
-		#dude.Jump()
+		dude.Jump()
 	
 	elif orbName.contains('duck') and !ducking and abs(rigidBody.position.y) < 1.5:
 		rigidBody.collision_mask = 3
 		rigidBody.gravity_scale = 0.0
 		ducking = true
 		
-		#dude.Roll()
+		dude.Roll()
 		tweenPosition(rigidBody, Vector3(0, -1, 0))
 	
 	elif orbName.contains('swim'):
