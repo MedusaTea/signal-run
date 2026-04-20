@@ -7,6 +7,9 @@ func _ready() -> void:
 	
 func StartRunning() -> void:
 	animPlayer.play('Sprint')
+
+func Roll() -> void:
+	animPlayer.play('Roll')
 	
 func Jump() -> void:
 	animPlayer.play('Jump')

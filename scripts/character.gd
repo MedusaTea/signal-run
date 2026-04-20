@@ -8,7 +8,7 @@ extends Node3D
 @onready var gameOverNode = get_node('/root/Root/Control/GameOverScreen')
 
 @export var sideStopRange = 6
-
+@export var sideHop = 4
 @export var duckTimerMax = 2.0
 @export var duckTimer = duckTimerMax
 
@@ -20,6 +20,14 @@ func _ready() -> void:
 	pass
 
 func GameStart() -> void:
+	rotation = Vector3(0,0,0)
+	position = Vector3(0,0,0)
+	
+	rigidBody.position = Vector3(0,0,0)
+	rigidBody.rotation = Vector3(0,0,0)
+	rigidBody.linear_velocity = Vector3(0,0,0)
+	rigidBody.angular_velocity = Vector3(0,0,0)
+	
 	dude.StartRunning()
 	
 func _physics_process(delta: float) -> void:
@@ -30,6 +38,7 @@ func _physics_process(delta: float) -> void:
 		rigidBody.gravity_scale = 1.0
 		ducking = false
 		duckTimer = duckTimerMax
+		dude.StartRunning()
 		
 	if ducking:
 		rigidBody.position.y = -1
@@ -45,20 +54,25 @@ func _on_body_entered(body: Node) -> void:
 	print(body.name)
 
 func tweenPosition(body, offset: Vector3) -> void:
+	print('tweenPosition %v' % offset)
 	var tween = get_tree().create_tween()
 	tween.tween_property(body, "position", body.position + offset, 0.1)
 	moveAudioPlayer.play()
 	
 func HandleAction(orbName) -> void:
+	if orbName.contains('empty'):
+		return
+		
+	print('handle action %s', orbName)
 	if orbName.contains('left'):
 		if self.position.x > -sideStopRange:
 			#self.position.x += -2
-			tweenPosition(self, Vector3(-2, 0, 0))
+			tweenPosition(self, Vector3(-sideHop, 0, 0))
 
 	elif orbName.contains('right'):
 		if self.position.x < sideStopRange:
 			#self.position.x += 2
-			tweenPosition(self, Vector3(2, 0, 0))
+			tweenPosition(self, Vector3(sideHop, 0, 0))
 
 	elif orbName.contains('jump') and !ducking and abs(rigidBody.position.y) < 1.5:
 		tweenPosition(rigidBody, Vector3(0, 4, 0))
@@ -69,6 +83,7 @@ func HandleAction(orbName) -> void:
 		rigidBody.gravity_scale = 0.0
 		ducking = true
 		
+		dude.Roll()
 		tweenPosition(rigidBody, Vector3(0, -1, 0))
 	
 	elif orbName.contains('swim'):

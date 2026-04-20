@@ -4,11 +4,11 @@ extends Node
 @export var orbTopOffset = 20
 @export var pressDelayThreshold = 0.2
 @export var pressDelay = pressDelayThreshold
-@export var terrainSpeed = 10
 
+@onready var ObstacleSpawnTimer = $ObstacleSpawnTimer
 @onready var Character = get_node('/root/Root/Node3D/Character')
 @onready var OrbsControl = get_node('/root/Root/Control/QueueBar/Orbs')
-@onready var TerrainObjects = get_node('/root/Root/Node3D/TerrainObjects')
+@onready var Obstacles = get_node('/root/Root/Node3D/Obstacles')
 @onready var gameOverScreen = get_node('/root/Root/Control/GameOverScreen')
 @onready var startScreen = get_node('/root/Root/Control/StartScreen')
 
@@ -19,23 +19,30 @@ extends Node
 @onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
 
 var orbQueue = []
+var orbNameCounter = 0
 
 func _ready() -> void:
 	randomize()
 
 func GameOverMan() -> void:
 	gameOverScreen.visible = true
-
-	for terrain in TerrainObjects.get_children():
-		terrain.get_child(0).linear_velocity = Vector3(0,0,0)
+	
+	ObstacleSpawnTimer.stop()
+	
+	for obstacle in Obstacles.get_children():
+		obstacle.get_child(0).linear_velocity = Vector3(0,0,0)
 
 func GameStart() -> void:
 	gameOverScreen.visible = false
 	startScreen.visible = false
-	
-	for terrain in TerrainObjects.get_children():
-		terrain.get_child(0).linear_velocity = Vector3(0,0,terrainSpeed)
 
+	for i in 6:
+		popOrb()
+			
+	for obstacle in Obstacles.get_children():
+		obstacle.queue_free()
+
+	ObstacleSpawnTimer.start()
 	Character.GameStart()
 	
 func _process(delta: float) -> void:
@@ -50,6 +57,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("press_duck"): addOrb('duck')
 	if Input.is_action_pressed("press_jump"): addOrb('jump')
 	if Input.is_action_pressed("press_right"): addOrb('right')
+	
+	if Input.is_action_pressed("enter_pressed"): GameStart()
+	if Input.is_action_pressed("space_pressed"): GameStart()
 
 func addOrb(type) -> void:
 	var orbCount = orbQueue.size()
@@ -73,10 +83,11 @@ func addOrb(type) -> void:
 	else:
 		return
 	
-	var viewport = orb.get_node('SubViewportContainer').get_node('SubViewport')
+	var viewport = orb.get_node('SubViewportContainer/SubViewport')
 	viewport.get_node('Node3D').position = Vector3(-100, orbCount * 100, 0)
 
-	orb.name = '%s %d' % [type, orbCount + 1]
+	orb.name = '%s %d' % [type, orbNameCounter]
+	orbNameCounter += 1
 	OrbsControl.add_child(orb)
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
 
@@ -91,7 +102,8 @@ func popOrb() -> void:
 		var orb = orbQueue.pop_front()
 		orb.queue_free()
 		updateAllOrbPositions()
-		Character.HandleAction(orb.name)
+		if orb:
+			Character.HandleAction(orb.name)
 		
 func _on_empty_orb_timer_timeout() -> void: 
 	addOrb('empty')
