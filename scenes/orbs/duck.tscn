@@ -36,3 +36,4 @@ mesh = SubResource("SphereMesh_ktqa0")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D" unique_id=1329616451]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -76.4285, 0, 15.878212)
+current = true

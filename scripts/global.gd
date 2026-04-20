@@ -20,6 +20,7 @@ extends Node
 @onready var emptyOrbScene = preload("res://scenes/orbs/empty.tscn")
 
 var orbQueue = []
+var orbNameCounter = 0
 
 func _ready() -> void:
 	randomize()
@@ -57,6 +58,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("press_duck"): addOrb('duck')
 	if Input.is_action_pressed("press_jump"): addOrb('jump')
 	if Input.is_action_pressed("press_right"): addOrb('right')
+	
+	if Input.is_action_pressed("enter_pressed"): GameStart()
 
 func addOrb(type) -> void:
 	var orbCount = orbQueue.size()
@@ -80,10 +83,11 @@ func addOrb(type) -> void:
 	else:
 		return
 	
-	var viewport = orb.get_node('SubViewportContainer').get_node('SubViewport')
+	var viewport = orb.get_node('SubViewportContainer/SubViewport')
 	viewport.get_node('Node3D').position = Vector3(-100, orbCount * 100, 0)
 
-	orb.name = '%s %d' % [type, orbCount + 1]
+	orb.name = '%s %d' % [type, orbNameCounter]
+	orbNameCounter += 1
 	OrbsControl.add_child(orb)
 	orb.position = Vector2(100 + orbCount * orbOffset, orbTopOffset)
 
@@ -98,7 +102,8 @@ func popOrb() -> void:
 		var orb = orbQueue.pop_front()
 		orb.queue_free()
 		updateAllOrbPositions()
-		Character.HandleAction(orb.name)
+		if orb:
+			Character.HandleAction(orb.name)
 		
 func _on_empty_orb_timer_timeout() -> void: 
 	addOrb('empty')

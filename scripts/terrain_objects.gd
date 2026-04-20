@@ -9,9 +9,14 @@ extends Node3D
 	preload("res://scenes/obstacles/terrain_test.tscn")
 ]
 
+var obstacleNameCounter = 0
+
 func SpawnNewObstacle(spawnOffset=0) -> void:
 	var index = randi() % obstacles.size()
 	var newNode = obstacles[index].instantiate()
+	
+	newNode.name = '%s %d' % [newNode.name, obstacleNameCounter]
+	obstacleNameCounter += 1
 	
 	var leftOrRight = randi() % 2
 	var modifier = Vector3(0,0,0)

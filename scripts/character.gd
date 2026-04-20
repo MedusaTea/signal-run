@@ -54,11 +54,16 @@ func _on_body_entered(body: Node) -> void:
 	print(body.name)
 
 func tweenPosition(body, offset: Vector3) -> void:
+	print('tweenPosition %v' % offset)
 	var tween = get_tree().create_tween()
 	tween.tween_property(body, "position", body.position + offset, 0.1)
 	moveAudioPlayer.play()
 	
 func HandleAction(orbName) -> void:
+	if orbName.contains('empty'):
+		return
+		
+	print('handle action %s', orbName)
 	if orbName.contains('left'):
 		if self.position.x > -sideStopRange:
 			#self.position.x += -2
