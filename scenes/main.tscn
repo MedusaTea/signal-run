@@ -47,7 +47,7 @@ script = ExtResource("1_o6xl0")
 [node name="Character" parent="Node3D" unique_id=4821569 instance=ExtResource("1_0wfyh")]
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/Character" unique_id=966227079]
-transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 6.1426697, 3.8944798)
+transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 6.1426697, 4.3870554)
 current = true
 script = ExtResource("3_trceg")
 
