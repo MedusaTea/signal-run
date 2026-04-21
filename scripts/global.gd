@@ -73,8 +73,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("press_jump"): addOrb('jump')
 	if Input.is_action_pressed("press_right"): addOrb('right')
 	
-	if Input.is_action_pressed("enter_pressed"): GameStart()
-	if Input.is_action_pressed("space_pressed"): GameStart()
+	#if Input.is_action_pressed("enter_pressed"): GameStart()
+	#if Input.is_action_pressed("space_pressed"): GameStart()
+	if Input.is_action_pressed("action_esc"):
+		GameOverMan()
 
 func addOrb(type) -> void:
 	if type != 'empty':

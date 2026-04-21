@@ -46,12 +46,10 @@ func GameStart() -> void:
 	StartRunning()
 	
 func endPunching() -> void:
-	print('is punching turned off')
 	isPunching = false
 	isPunchingTimer = isPunchingTimerMax
 	
 func endDucking() -> void:
-	print('is duck turned off')
 	rigidBody.position.y = 0
 	rigidBody.collision_mask = 7
 	rigidBody.gravity_scale = 1.0
