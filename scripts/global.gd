@@ -106,7 +106,6 @@ func popOrb() -> void:
 	if orbQueue.size() > 0:
 		var orb = orbQueue.pop_front()
 		if orb:
-			#SignalEffect.emitting = true
 			Character.HandleAction(orb)
 		
 func _on_empty_orb_timer_timeout() -> void: 
