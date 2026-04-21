@@ -7,13 +7,17 @@
 [ext_resource type="Script" uid="uid://l4ynwp873kfj" path="res://scripts/camera_mode.gd" id="3_trceg"]
 [ext_resource type="Theme" uid="uid://mk4nu7dkl8b2" path="res://themes/default.tres" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://70teesn04f45" path="res://scripts/fps.gd" id="5_tefeu"]
-[ext_resource type="PackedScene" uid="uid://dauymrxgj8prq" path="res://scenes/cable.tscn" id="6_trceg"]
 [ext_resource type="PackedScene" uid="uid://fwfob7syxlfr" path="res://scenes/transmitter.tscn" id="7_jkv2x"]
 [ext_resource type="AudioStream" uid="uid://cxwk3toi8wnlt" path="res://assets/heroes-bgm.wav" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://dcik3ar8t0u8e" path="res://assets/orb-border.png" id="9_eb6dy"]
 [ext_resource type="AudioStream" uid="uid://c4g68slhqq7w8" path="res://assets/Brick Punch 001.wav" id="10_choun"]
 [ext_resource type="Script" uid="uid://bxm0x61qc1u2a" path="res://scripts/points.gd" id="10_trceg"]
 [ext_resource type="AudioStream" uid="uid://ckmra0k135q8o" path="res://assets/Window Jump 001.wav" id="11_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://brwl3r247jqsl" path="res://scenes/orbs/left.tscn" id="12_0ld40"]
+[ext_resource type="PackedScene" uid="uid://damggie8nfbi3" path="res://scenes/orbs/duck.tscn" id="13_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://clbwxcroygo41" path="res://scenes/orbs/jump.tscn" id="14_yc10j"]
+[ext_resource type="PackedScene" uid="uid://crf43errkklpu" path="res://scenes/orbs/punch.tscn" id="15_jscy8"]
+[ext_resource type="PackedScene" uid="uid://bq2pt6ffwujcy" path="res://scenes/orbs/right.tscn" id="16_pm3ni"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
 noise_type = 4
@@ -52,14 +56,6 @@ script = ExtResource("1_o6xl0")
 transform = Transform3D(1, 0, 0, 0, 0.8859204, 0.46383733, 0, -0.46383733, 0.8859204, 0, 6.1426697, 4.3870554)
 current = true
 script = ExtResource("3_trceg")
-
-[node name="Cable" parent="Node3D/Character" unique_id=1067882525 instance=ExtResource("6_trceg")]
-transform = Transform3D(0.038349085, -0.024177128, 0, 0.03785829, 0.024490567, 0, 0, 0, 0.011261283, -1.6573229, 4.6077037, 0.3219123)
-visible = false
-
-[node name="Cable2" parent="Node3D/Character" unique_id=1221567721 instance=ExtResource("6_trceg")]
-transform = Transform3D(0.038349085, -0.024177128, 0, 0.03785829, 0.024490567, 0, 0, 0, 0.011261283, -1.6335156, 8.9074745, 0.3219123)
-visible = false
 
 [node name="Transmitter" parent="Node3D/Character" unique_id=874254877 instance=ExtResource("7_jkv2x")]
 transform = Transform3D(0.36774254, -0.055608418, 0.365553, 0.09042026, 0.5134343, -0.012857508, -0.35853243, 0.072448894, 0.37170088, -3.2304354, 6.096629, 0.3246774)
@@ -158,13 +154,23 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch_mode = 0
+ratio = 1.8196
 
 [node name="ColorRect" type="ColorRect" parent="Control/StartScreen" unique_id=1940939697]
 layout_mode = 2
-color = Color(0.5647059, 0.5686275, 0.80784315, 0.72156864)
+color = Color(0.27400842, 0.26852432, 0.48017853, 0.87058824)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/StartScreen" unique_id=2012410860]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+text = "                   Each Input is Queued in the Transmitter
+
+                   After Each Input the Action at the front
+                of the Queue Will Be Signaled to The Dude."
 
 [node name="Button" type="Button" parent="Control/StartScreen" unique_id=300257667]
 layout_mode = 2
@@ -183,6 +189,38 @@ offset_bottom = 1250.0
 theme = ExtResource("4_jyhfs")
 text = "Points: 0"
 script = ExtResource("10_trceg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=2080626345]
+layout_mode = 0
+offset_left = 1757.9999
+offset_top = 182.0
+offset_right = 1846.6661
+offset_bottom = 338.0
+scale = Vector2(2.1097631, 2.1061752)
+
+[node name="AspectRatioContainer2" parent="Control/VBoxContainer" unique_id=755513043 instance=ExtResource("12_0ld40")]
+visible = false
+layout_mode = 2
+stretch_mode = 3
+
+[node name="AspectRatioContainer6" parent="Control/VBoxContainer" unique_id=1595383583 instance=ExtResource("12_0ld40")]
+layout_mode = 2
+
+[node name="AspectRatioContainer" parent="Control/VBoxContainer" unique_id=534771899 instance=ExtResource("13_gqmmt")]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="AspectRatioContainer3" parent="Control/VBoxContainer" unique_id=346658407 instance=ExtResource("14_yc10j")]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="AspectRatioContainer4" parent="Control/VBoxContainer" unique_id=2127605695 instance=ExtResource("15_jscy8")]
+layout_mode = 2
+stretch_mode = 1
+
+[node name="AspectRatioContainer5" parent="Control/VBoxContainer" unique_id=1289508874 instance=ExtResource("16_pm3ni")]
+layout_mode = 2
+stretch_mode = 1
 
 [node name="ObstacleSpawnTimer" type="Timer" parent="." unique_id=1786186042]
 wait_time = 3.25

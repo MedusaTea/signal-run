@@ -58,7 +58,11 @@ mesh = SubResource("CylinderMesh_o5qli")
 transform = Transform3D(-2.3126175, 0, -3.4919555e-07, 0, 2.3126175, 0, 3.4919555e-07, 0, -2.3126175, 0, 0, 0)
 
 [node name="FabricCable" parent="RigidBody3D" unique_id=415077850 instance=ExtResource("3_lrhn5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06386256, 3.6126301, 0.2601142)
+transform = Transform3D(0.9990528, 0.035438538, 0.025259487, -0.040549304, 0.96876967, 0.24462494, -0.015801482, -0.24541748, 0.9692886, -0.06386256, 3.6126301, 0.17989707)
+
+[node name="FabricCable2" parent="RigidBody3D" unique_id=913826636 instance=ExtResource("3_lrhn5")]
+transform = Transform3D(2.064788, 0.066079594, 0.031184906, -0.0838051, 1.8063924, 0.30200952, -0.032657646, -0.45761165, 1.1966661, -0.06386256, 2.7563434, -0.9896725)
+visible = false
 
 [node name="CrashParticles" type="CPUParticles3D" parent="." unique_id=1586521366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969306, -0.59654117)

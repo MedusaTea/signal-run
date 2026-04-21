@@ -73,8 +73,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("press_jump"): addOrb('jump')
 	if Input.is_action_pressed("press_right"): addOrb('right')
 	
-	if Input.is_action_pressed("enter_pressed"): GameStart()
-	if Input.is_action_pressed("space_pressed"): GameStart()
+	#if Input.is_action_pressed("enter_pressed"): GameStart()
+	#if Input.is_action_pressed("space_pressed"): GameStart()
+	if Input.is_action_pressed("action_esc"):
+		GameOverMan()
 
 func addOrb(type) -> void:
 	if type != 'empty':
@@ -106,7 +108,6 @@ func popOrb() -> void:
 	if orbQueue.size() > 0:
 		var orb = orbQueue.pop_front()
 		if orb:
-			#SignalEffect.emitting = true
 			Character.HandleAction(orb)
 		
 func _on_empty_orb_timer_timeout() -> void: 

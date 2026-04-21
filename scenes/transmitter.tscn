@@ -52,7 +52,7 @@ transform = Transform3D(0.52132183, 0, 0, 0, 0.52132183, 0, 0, 0, 0.52132183, -0
 mesh = SubResource("SphereMesh_qlwrd")
 
 [node name="Orb2" type="MeshInstance3D" parent="." unique_id=416494902]
-transform = Transform3D(0.52132183, 0, 0, 0, 0.52132183, 0, 0, 0, 0.52132183, 0.7, -0.061, 0.5)
+transform = Transform3D(0.52132183, 0, 0, 0, 0.52132183, 0, 0, 0, 0.52132183, 1.0557082, -0.2027346, 0.5)
 mesh = SubResource("SphereMesh_jjvfu")
 
 [node name="Wiring" type="MeshInstance3D" parent="." unique_id=1156286545]

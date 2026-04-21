@@ -21,6 +21,7 @@ extends Node3D
 
 @export var ducking = false
 @export var isPunching = false
+@export var emitting = false
 
 var testTimerMax = 5
 var testTimer = testTimerMax
@@ -45,12 +46,10 @@ func GameStart() -> void:
 	StartRunning()
 	
 func endPunching() -> void:
-	print('is punching turned off')
 	isPunching = false
 	isPunchingTimer = isPunchingTimerMax
 	
 func endDucking() -> void:
-	print('is duck turned off')
 	rigidBody.position.y = 0
 	rigidBody.collision_mask = 7
 	rigidBody.gravity_scale = 1.0
@@ -58,13 +57,14 @@ func endDucking() -> void:
 	duckTimer = duckTimerMax
 
 func _physics_process(delta: float) -> void:
-	
-
 	testTimer -= delta * 20
 	if testTimer < 0:
-		testTimer = testTimerMax
+		emitting = false
+		testTimer = testTimerMax	
 	
+	#if emitting:
 	$RigidBody3D/FabricCable/Path3D/PathFollow3D.progress = testTimer
+	
 	
 	duckTimer -= delta
 	isPunchingTimer -= delta
@@ -102,6 +102,8 @@ func tweenPosition(body, offset: Vector3) -> void:
 func HandleAction(orbName) -> void:
 	if orbName.contains('empty'):
 		return
+	
+	emitting = true
 		
 	if orbName.contains('left'):
 		if self.position.x > -sideStopRange:
@@ -137,6 +139,11 @@ func HandleAction(orbName) -> void:
 			elif orbName.contains('climb'):
 				pass	
 
+	#await get_tree().create_timer(1).timeout
+	#emitting = false
+	#$RigidBody3D/FabricCable/Path3D/PathFollow3D.progress = 4.2
+	
+	
 func StartRunning() -> void:
 	animPlayer.play('Sprint')
 	
