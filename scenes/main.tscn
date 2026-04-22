@@ -77,9 +77,11 @@ transform = Transform3D(-0.07983087, -0.9829225, -0.16580226, 0.4264078, -0.1840
 
 [node name="Control" type="Control" parent="." unique_id=1863188031]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1974.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="fps" type="Label" parent="Control" unique_id=507384827]
 visible = false
@@ -123,9 +125,12 @@ texture = ExtResource("9_eb6dy")
 
 [node name="GameOverScreen" type="AspectRatioContainer" parent="Control" unique_id=154508587]
 visible = false
-layout_mode = 0
-offset_right = 1977.0
-offset_bottom = 1092.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 stretch_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="Control/GameOverScreen" unique_id=1473626510]
@@ -181,21 +186,30 @@ text = "Start"
 alignment = 0
 
 [node name="PointsLabel" type="Label" parent="Control" unique_id=2126955146]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 897.0
-offset_right = 546.0
-offset_bottom = 1250.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -175.0
+offset_right = 528.0
+grow_vertical = 0
 theme = ExtResource("4_jyhfs")
 text = "Points: 0"
 script = ExtResource("10_trceg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=2080626345]
-layout_mode = 0
-offset_left = 1757.9999
-offset_top = 182.0
-offset_right = 1846.6661
-offset_bottom = 338.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -347.00012
+offset_top = -79.0
+offset_right = -185.84448
+offset_bottom = 77.47479
+grow_horizontal = 0
+grow_vertical = 2
 scale = Vector2(2.1097631, 2.1061752)
 
 [node name="AspectRatioContainer2" parent="Control/VBoxContainer" unique_id=755513043 instance=ExtResource("12_0ld40")]
